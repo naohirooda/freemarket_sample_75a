@@ -13,10 +13,10 @@
 |last_name_katakana|string|null: false|
 
 ### Association
-- belongs_to :address
-- has_many :cards
-- has_many :comments
-- has_many :items
+- belongs_to :address,　dependent: :destroy
+- has_many :cards, dependent: :destroy
+- has_many :comments, dependent: :destroy
+- has_many :items, dependent: :destroy
 
 ## addresses_table
 |Column|Type|Options|
@@ -71,7 +71,7 @@
 
 ### Association
 - belongs_to :user
-- has_many :comments
+- has_many :comments, dependent: :destroy
 - has_many :categorys, through: :item_categorys
 - has_many :item_categorys
 
