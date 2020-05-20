@@ -11,6 +11,17 @@
 |last_name|string|null: false|
 |first_name_katakana|string|null: false|
 |last_name_katakana|string|null: false|
+
+### Association
+- belongs_to :address
+- has_many :cards
+- has_many :comments
+- has_many :items
+
+## addresses_table
+|Column|Type|Options|
+|------|----|-------|
+|user_id|refarences|null: false, foreign_key: true|
 |post_code|string|null: false|
 |preficture|string|null: false|
 |city|string|null: false|
@@ -19,9 +30,7 @@
 |phone_number|string||
 
 ### Association
-- has_many :cards
-- has_many :comments
-- has_many :items
+- has_many :users
 
 ## cards_table
 |Column|Type|Options|
@@ -53,7 +62,7 @@
 |item_image|text|null: false|
 |category_id|references|null: false, foreign_key: true|
 |brand_name|string||
-|item_status|string|null: false|
+|item_status|integer|null: false|
 |auction_status|string|null: false|
 |delivery_fee|integer|null: false|
 |shipping_origin|string|null: false|
