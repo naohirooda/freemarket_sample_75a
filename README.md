@@ -9,8 +9,8 @@
 |password|string|null: false|
 |first_name|string|null: false|
 |last_name|string|null: false|
-|first_name_katakana|string|null: false|
-|last_name_katakana|string|null: false|
+|first_name_kana|string|null: false|
+|last_name_kana|string|null: false|
 
 ### Association
 - has_one :address,　dependent: :destroy
@@ -30,7 +30,7 @@
 |phone_number|string||
 
 ### Association
-- belongs_to :users
+- belongs_to :user
 
 ## cards_table
 |Column|Type|Options|
@@ -59,7 +59,6 @@
 |------|----|-------|
 |name|string|null: false, add_index|
 |explanation|text|null: false|
-|image_id|text| null:false, foreign_key: true|
 |category_id|references|null: false, foreign_key: true|
 |brand_name|string||
 |item_status|integer|null: false|
@@ -72,6 +71,7 @@
 ### Association
 - belongs_to :user
 - has_many :comments, dependent: :destroy
+- has_many :images, dependent: :destroy
 - belongs_to :category
 - has_many :item_categorys
 
@@ -82,8 +82,7 @@
 |item_id|references|null:false, foreign_key: true|
 
 ### Association
-- has_many :items, through:  :item_categorys
-- has_many :item_categorys
+- belongs_to :item
 
 ## categorys_table
 |Column|Type|Options|
@@ -92,5 +91,4 @@
 |ancestry|string|add_index|
 
 ### Association
-- has_many :items, through:  :item_categorys
-- has_many :item_categorys
+- has_many :items
