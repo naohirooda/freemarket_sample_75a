@@ -1,24 +1,94 @@
 # README
+## how to use GitHub Desktop
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users_table
+|Column|Type|Options|
+|------|----|-------|
+|nickname|string|null: false, unique:true|
+|email|string|null: false, unique:true|
+|password|string|null: false|
+|first_name|string|null: false|
+|last_name|string|null: false|
+|first_name_kana|string|null: false|
+|last_name_kana|string|null: false|
 
-Things you may want to cover:
+### Association
+- has_one :address,　dependent: :destroy
+- has_many :cards, dependent: :destroy
+- has_many :comments, dependent: :destroy
+- has_many :items, dependent: :destroy
 
-* Ruby version
+## addresses_table
+|Column|Type|Options|
+|------|----|-------|
+|user_id|refarences|null: false, foreign_key: true|
+|post_code|string|null: false|
+|preficture|string|null: false|
+|city|string|null: false|
+|address|string|null: false|
+|building_name|string||
+|phone_number|string||
 
-* System dependencies
+### Association
+- belongs_to :user
 
-* Configuration
+## cards_table
+|Column|Type|Options|
+|------|----|-------|
+|user_id|refarences|null: false, foreign_key: true|
+|card_id|string|null: false|
+|custmer_id|string|null: false|
+|card_number|string|null: false, unique:true|
 
-* Database creation
+### Association
+- belongs_to :user
 
-* Database initialization
+## comments_table
+|Column|Type|Options|
+|------|----|-------|
+|comment|text|null: false|
+|user_id|references|null: false, foreign_key: true|
+|item_id|references|null: false, foreign_key: true|
 
-* How to run the test suite
+### Association
+- belongs_to :user
+- belongs_to :item
 
-* Services (job queues, cache servers, search engines, etc.)
+## items_table
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null: false, add_index|
+|explanation|text|null: false|
+|category_id|references|null: false, foreign_key: true|
+|brand_name|string||
+|item_status|integer|null: false|
+|auction_status|string|null: false|
+|delivery_fee|integer|null: false|
+|shipping_origin|string|null: false|
+|days_until_shipping|string|null: false|
+|exhibition_price|integer|null: false|
 
-* Deployment instructions
+### Association
+- belongs_to :user
+- has_many :comments, dependent: :destroy
+- has_many :images, dependent: :destroy
+- belongs_to :category
+- has_many :item_categorys
 
-* ...
+## images_table
+|Column|Type|Options|
+|------|----|-------|
+|image|text|null: false|
+|item_id|references|null:false, foreign_key: true|
+
+### Association
+- belongs_to :item
+
+## categorys_table
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null: false, unique:true|
+|ancestry|string|add_index|
+
+### Association
+- has_many :items
