@@ -13,7 +13,7 @@
 |last_name_katakana|string|null: false|
 
 ### Association
-- belongs_to :address,　dependent: :destroy
+- has_one :address,　dependent: :destroy
 - has_many :cards, dependent: :destroy
 - has_many :comments, dependent: :destroy
 - has_many :items, dependent: :destroy
@@ -30,7 +30,7 @@
 |phone_number|string||
 
 ### Association
-- has_many :users
+- belongs_to :users
 
 ## cards_table
 |Column|Type|Options|
@@ -57,9 +57,9 @@
 ## items_table
 |Column|Type|Options|
 |------|----|-------|
-|item_name|string|null: false, add_index|
-|item_explanation|text|null: false|
-|item_image|text|null: false|
+|name|string|null: false, add_index|
+|explanation|text|null: false|
+|image_id|text| null:false, foreign_key: true|
 |category_id|references|null: false, foreign_key: true|
 |brand_name|string||
 |item_status|integer|null: false|
@@ -72,18 +72,18 @@
 ### Association
 - belongs_to :user
 - has_many :comments, dependent: :destroy
-- has_many :categorys, through: :item_categorys
+- belongs_to :category
 - has_many :item_categorys
 
-## item_categorys_table
+## images_table
 |Column|Type|Options|
 |------|----|-------|
-|item_id|references|null: false, foreign_key: true|
-|category_id|references|null: false, foreign_key: true|
+|image|text|null: false|
+|item_id|references|null:false, foreign_key: true|
 
 ### Association
-- belongs_to :item
-- belongs_to :category
+- has_many :items, through:  :item_categorys
+- has_many :item_categorys
 
 ## categorys_table
 |Column|Type|Options|
