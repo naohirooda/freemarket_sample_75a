@@ -1,0 +1,51 @@
+#account-page.account-page
+  .account-page__inner.clearfix
+    .account-page__inner--left.account-page__header
+      %h5 新規アカウントの作成
+      = render "devise/shared/links"
+    .account-page__inner--right.user-form
+      = form_for @user, url: user_registration_path do |f|
+        = devise_error_messages!
+        .field
+          .field-label
+            = f.label :nickname
+          .field-input
+            = f.text_field :nickname, autofocus: true
+        .field
+          .field-label
+            = f.label :email
+          .field-input
+            = f.email_field :email
+        .field
+          .field-label
+            = f.label :password
+            %i (英数字7文字以上)
+          .field-input
+            = f.password_field :password, autocomplete: "off"
+        .field
+          .field-label
+            = f.label :password_confirmation
+          .field-input
+            = f.password_field :password_confirmation, autocomplete: "off"
+        .field
+          .field-label
+            = f.label :last_name
+          .field-input
+            = f.text_field :last_name
+        .field
+          .field-label
+            = f.label :first_name
+          .field-input
+            = f.text_field :first_name
+        .field
+          .field-label
+            = f.label :last_name_kana
+          .field-input
+            = f.text_field :last_name_kana
+        .field
+          .field-label
+            = f.label :first_name_kana
+          .field-input
+            = f.text_field :first_name_kana
+        .actions
+          = f.submit "次へ", class: 'btn'
