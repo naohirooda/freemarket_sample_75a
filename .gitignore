@@ -26,4 +26,4 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 config/secrets.yml
-app/assets/images/.DS_Store
+.DS_Store
