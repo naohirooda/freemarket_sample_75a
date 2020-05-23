@@ -1,0 +1,12 @@
+@mixin underline(){
+  &::after{
+    content:"";
+    width: 70px;
+    height: 4px;
+    background-color: #3ccace;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translatex(-50%);
+  }
+}
