@@ -1,0 +1,57 @@
+.main-pay
+  .main-pay__header
+    = link_to image_tag("logo/logo-white.png", size: "300x100", class: "logo")
+  .main-pay__main
+    %section.buy__item__content
+      %h2.buy__item__title 購入内容確認
+    %section.buy__item__content
+      .buy__item__content__inner
+        %h3.buy__item__image 
+          = "写真"
+        .buy__item__detail
+          .buy__item__name 商品の名前
+          .buy-price 
+            .price ¥700
+            .delivery_fee (税込) 送料込み
+            
+
+    %section.buy__item__content
+      .buy__item__user__info
+        .buy__content__table
+          .buy__price__cell
+            .buy__price__label
+              支払い金額
+            .buy__price
+              ￥７００００００
+                
+          %section.buy__content__buy__user__info
+            .buy__content__inner
+              %h3.buy__user__info__title
+                お支払い方法
+                .buy__user__info__form
+                  .icon__plus 
+                    = icon("far", "plus-square")
+                  .buy__register__text
+                    =link_to "登録してください","#",class:"buy__register__text"
+          %section.buy__content__buy__user__info
+            .buy__content__inner
+              .buy__user__info__title
+                発送先
+                .buy__user__info__form
+                  .icon__plus 
+                    = icon("far", "plus-square")
+                  .buy__register__text
+                    =link_to "登録してください","#",class:"buy__register__text"
+          %section.buy__content__buy__user__info
+            %button.buy__btn{type:"submit"} 購入する
+
+  .main-pay__fotter
+    .main-pay__fotter_nav
+      %ul.clearfix
+        %li 
+          =link_to "プライバシーポリシー","#",class:"fotter-link"
+        %li 
+          =link_to "利用規約","#",class:"fotter-link"
+        %li
+          =link_to "特定取引に関する表記","#",class:"fotter-link"
+

@@ -1,0 +1,437 @@
+* {
+  font-family: "Source Sans Pro", Helvetica, Arial, "游ゴシック体", "YuGothic", "メイリオ", "Meiryo", sans-serif;
+  box-sizing: border-box;
+  .main{
+    width: 100%;
+    height: 100%;
+    background-color: #f8f8f8;
+    &__upper{
+      width: 100%;
+      height: 560px;
+      background-image: url(pict/bg-mainVisual-pict_pc.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center top;
+      padding: 0 60px;
+      @include flex_align-c();
+      &__box{
+        max-width: 1280px;
+        width: 100%;
+        margin: 0 auto;
+        padding-top: 35px;
+        h2{
+          font-size: 60px;
+          color: #fff;
+          line-height: 1.2;
+          text-shadow: 0 0 5px rgba(0,0,0,0.4);
+        }
+        p{
+          text-shadow: 0 0 5px rgba(0,0,0,0.4);
+          font-size: 18px;
+          color: #fff;
+          line-height: 1.77778;
+          margin:16px 0 0 0;
+        }
+        &__btn{
+          display: flex;
+          margin: 24px 0 0 0;
+          &__abtn {
+            width: 180px;
+            img{
+              width: 100%;
+              vertical-align: bottom;
+              @include opacity();
+            }
+          } 
+          &__gbtn{
+            width: 180px;
+            img{
+              width: 100%;
+              vertical-align: bottom;
+              margin-left:10px;
+              @include opacity();
+            }
+          } 
+        }
+      }
+    }
+    &__reason{
+      width: 100%;
+      padding: 60px 20px;
+      .subtitle{
+        width: 100%;
+        text-align: center;
+        font-size: 26px;
+        line-height: 1.4;
+        font-weight: bold;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        position: relative;
+        @include underline();
+      }
+      .lists{
+        width: 100%;
+        max-width: 1020px;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        .list{
+          width: 30%;
+          margin: 16px 5% 0 0;
+          text-align: left;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          &__pict{
+            position: relative;
+            margin-bottom: 20px;
+            span {
+              display: inline-block;
+              position: absolute;
+              top: 0;
+              left: 0;
+              border-radius: 4px;
+              font-size: 30px;
+              text-align: center;
+              margin-right: 5px;
+              padding: 10px 20px;
+              background-color: #3ccace;
+              color: #fff;
+            }
+            img{
+              width: 100%;
+              vertical-align: bottom;
+            }
+          }
+          .list__h{
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 50px;
+            margin-left: 2px;
+            span{
+              color: #3ccace;
+            }
+          }
+          .list__p{
+            font-size: 18px;
+            line-height: 1.5;
+            margin-top: 16px;
+            font-weight: normal;
+          }
+        }
+        .list__last{
+          margin-top: 16px;
+          width: 30%;
+          text-align: left;
+          @include flex_align-c();
+          flex-direction: column;
+          &__h{
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 50px;
+            margin-left: 2px;
+            color: #3ccace;
+            span{
+              color: black;
+            }
+          }
+          &__p{
+            font-size: 18px;
+            line-height: 1.5;
+            margin-top: 16px;
+            font-weight: normal;
+          }
+        }
+
+      }
+    }
+    &__middle{
+      width: 100%;
+      height: 400px;
+      background-image: url(pict/bg-topMiddleDl-pict.jpg);
+      background-position: right bottom;
+      background-size: cover;
+      @include flex_align-c();
+      &__box{
+        color:#fff;
+        text-shadow: 0 0 5px rgba(0,0,0,0.4);
+        max-width: 1040px;
+        width: 100%;
+        margin: 0 auto;
+        h2{
+          font-size: 27px;
+          font-weight: bold;
+          line-height: 1.4;
+        }
+        p{
+          font-size: 18px;
+          margin: 20px 0 30px;
+          line-height: 1.5;
+          font-weight: normal;
+        }
+        &__btn{
+          display: flex;
+          &__abtn{
+            margin-right: 10px;
+            img{
+              width: 180px;
+              @include opacity();
+            }
+          }
+          &__gbtn{
+            margin-right: 10px;
+            img{
+              width: 180px;
+              @include opacity();
+            }
+          }
+        }
+      }
+    }
+    &__char{
+      width: 100%;
+      padding: 60px 100px;
+      background-color: #fff;
+      .subtitle{
+        width: 100%;
+        text-align: center;
+        font-size: 27px;
+        font-weight: bold;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        position: relative;
+        @include underline();
+      }
+      .lists{
+        width: 100%;
+        max-width: 1060px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        .list{
+          width: calc(1/3 * 100%);
+          padding: 0 20px;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          &__pict{
+            width: 70%;
+            margin: 0 auto;
+            line-height: 120px;
+            img{
+              width: 100%;
+              vertical-align: bottom;
+            }
+          }
+          .list__h{
+            font-weight: bold;
+            font-size: 19px;
+            margin: 38px 0 10px;
+          }
+          .list__p{
+            font-size: 17px;
+            margin-bottom: 40px;
+            font-weight: 200;
+            text-align: left;
+          }
+        }
+      }
+    }
+    &__category{
+      height: 100%;
+      padding-top: 80px;
+      background-color: #f8f8f8;
+      h2{
+        text-align: center;
+        font-size: 28px;
+        line-height: 1.4;
+        font-weight: bold;
+      }
+      &__box{
+        &__head{
+          text-align: center;
+          .title{
+            font-size: 24px;
+            text-decoration: none;
+            color: #3ccace;
+            font-weight: bold;
+          }
+        }
+      }
+      &__lists{
+        width: 780px;
+        margin: 26px auto;
+        display: flex;
+        justify-content: space-around;
+        &__list{
+          width: 220px;
+          display: inline-block;
+          float: left;
+          @include opacity();
+          a{
+            background-color: #fff;
+            display: inline-block;
+            text-decoration: none;
+            position: relative;
+            figure{
+              width: 220px;
+              height: 150px;
+              position: relative;
+              overflow: hidden;
+              margin: 0;
+              z-index: auto;
+              img{
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                z-index: auto;
+                height: 150px;
+                object-fit: cover;
+              }
+            }
+            .list__body{
+              background-color: white;
+              color:#333;
+              padding: 16px;
+              h3{
+                overflow: hidden;
+                line-height: 1.5;
+                font-size: 16px;
+                text-align: left;
+              }
+            }
+            .list__price{
+              font-size: 16px;
+              color: #333333;
+              ul{
+                @include flex_align-c();
+                justify-content: space-between;
+                list-style: none;
+                li{
+                  color: #333333;
+                  .fas{
+                    display: inline-block;
+                    font-size: inherit;
+                    text-rendering: auto;
+                    -webkit-font-smoothing: antialiased;
+                    font: normal normal normal 14px/1 "Font Awesome 5 Free";
+                    &::before{
+                      content: "\f005";
+                    }
+                  }
+                }
+              }
+              p{
+                font-size: 10px;
+                text-align: left;
+                color: #333333;
+                font-weight: normal;
+              }
+            }
+          }
+        }
+      }
+    }
+    &__brand{
+      height: 100%;
+      padding: 80px 0;
+      background-color: #f8f8f8;
+      h2{
+        text-align: center;
+        font-size: 28px;
+        line-height: 1.4;
+        font-weight: bold;
+      }
+      &__box{
+        &__head{
+          text-align: center;
+          .title{
+            font-size: 24px;
+            text-decoration: none;
+            color: #3ccace;
+            font-weight: bold;
+          }
+        }
+      }
+      &__lists{
+        width: 780px;
+        margin: 26px auto;
+        display: flex;
+        justify-content: space-around;
+        &__list{
+          width: 220px;
+          display: inline-block;
+          float: left;
+          @include opacity();
+          a{
+            background-color: #fff;
+            display: inline-block;
+            text-decoration: none;
+            position: relative;
+            figure{
+              width: 220px;
+              height: 150px;
+              position: relative;
+              overflow: hidden;
+              margin: 0;
+              z-index: auto;
+              img{
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                z-index: auto;
+                height: 150px;
+                object-fit: cover;
+              }
+            }
+            .list__body{
+              background-color: white;
+              color:#333;
+              padding: 16px;
+              h3{
+                overflow: hidden;
+                line-height: 1.5;
+                font-size: 16px;
+                text-align: left;
+              }
+            }
+            .list__price{
+              font-size: 16px;
+              color: #333333;
+              ul{
+                @include flex_align-c();
+                justify-content: space-between;
+                list-style: none;
+                li{
+                  color: #333333;
+                  .fas{
+                    display: inline-block;
+                    font-size: inherit;
+                    text-rendering: auto;
+                    -webkit-font-smoothing: antialiased;
+                    font: normal normal normal 14px/1 "Font Awesome 5 Free";
+                    &::before{
+                      content: "\f005";
+                    }
+                  }
+                }
+              }
+              p{
+                font-size: 10px;
+                text-align: left;
+                color: #333333;
+                font-weight: normal;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
