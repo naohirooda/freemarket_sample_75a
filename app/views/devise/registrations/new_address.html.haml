@@ -1,0 +1,35 @@
+%h2 住所情報登録
+= render "devise/shared/error_messages", resource: @address
+= form_for @address do |f|
+  .field
+    .field-label
+      = f.label :post_code
+    .field-input
+      = f.text_field :post_code
+  .field
+    .field-label
+      = f.label :preficture
+    .field-input
+      = f.text_field :preficture
+  .field
+    .field-label
+      = f.label :city
+    .field-input
+      = f.text_field :city
+  .field
+    .field-label
+      = f.label :address
+    .field-input
+      = f.text_field :address
+  .field
+    .field-label
+      = f.label :building_name
+    .field-input
+      = f.text_field :building_name
+  .field
+    .field-label
+      = f.label :phone_number
+    .field-input
+      = f.text_field :phone_number
+  .actions
+    = f.submit "登録", class: 'btn'
