@@ -1,20 +1,26 @@
-#account-page.account-page
-  .account-page__inner
-    .account-page__inner--left.account-page__header
-      %h5 登録しているユーザーでログイン
-      = render "devise/shared/links"
-    .account-page__inner--right.user-form
-      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        .field
-          .field-label
+.account__page
+  .account__page__header
+    = link_to image_tag("logo.png", alt: "logo"), root_path
+  .account__page__main
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .account__page__main__content
+        .account__page__main__content--error
+          = devise_error_messages!
+        .field__title
+          ログイン
+        .field__label
+          .name
             = f.label :email
-          .field-input
-            = f.email_field :email, autofocus: true
-          .field
-            .field-label
-              = f.label :password
-              %i (英数字7文字以上)
-            .field-input
-              = f.password_field :password, autocomplete: "off"
-          .actions
-            = f.submit "ログイン", class: 'btn'
+          .required
+            必須
+        .field__input
+          = f.email_field :email, placeholder: "メールアドレス", class: "textbox"
+        .field__label
+          .name
+            = f.label :password
+          .required
+            必須
+        .field__input
+          = f.password_field :password, autocomplete: "off", placeholder: "パスワード", class: "textbox"
+        .actions
+          = f.submit "ログイン", class: "submit-btn"

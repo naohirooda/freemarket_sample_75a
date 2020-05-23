@@ -3,7 +3,7 @@ ja:
     attributes:
       user:
         nickname: ニックネーム
-        email: Eメール
+        email: メールアドレス
         password: password
         first_name: 名
         last_name: 姓
