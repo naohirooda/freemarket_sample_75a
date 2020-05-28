@@ -1,0 +1,7 @@
+%h1 newページ
+= form_with model: @item, local: true do |f|
+  = render 'layouts/error_messages', model: f.object
+  = f.text_field :item_name
+  .category
+    = f.collection_select :category_id, @category_parent_array, :id, :name, include_blank: "---"
+  = f.submit '出品'

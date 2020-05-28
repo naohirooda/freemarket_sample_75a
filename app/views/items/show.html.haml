@@ -1,0 +1,15 @@
+%h1 showページ
+.item_name 商品名
+= @item.item_name
+- if @category_id == 46 or @category_id == 74 or @category_id == 134 or @category_id == 142 or @category_id == 147 or @category_id == 150 or @category_id == 158
+  .category__parent
+    = @category_child.name
+  .category__child
+    = @category_grandchild.name
+- else
+  .category__parent
+    = @category_parent.name
+  .category__child
+    = @category_child.name
+  .category__grandchild
+    = @category_grandchild.name
