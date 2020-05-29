@@ -62,10 +62,10 @@
 |category_id|references|null: false, foreign_key: true|
 |brand_name|string||
 |item_status|integer|null: false|
-|auction_status|string|null: false|
+|auction_status|integer|null: false|
 |delivery_fee|integer|null: false|
-|shipping_origin|string|null: false|
-|days_until_shipping|string|null: false|
+|shipping_origin|integer|null: false|
+|days_until_shipping|integer|null: false|
 |exhibition_price|integer|null: false|
 
 ### Association
