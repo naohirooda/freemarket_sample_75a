@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_24_051516) do
+ActiveRecord::Schema.define(version: 2020_05_24_051518) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "post_code", null: false
@@ -33,6 +33,30 @@ ActiveRecord::Schema.define(version: 2020_05_24_051516) do
     t.index ["ancestry"], name: "index_categories_on_ancestry"
   end
 
+  create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "image", null: false
+    t.bigint "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_images_on_item_id"
+  end
+
+  create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "item_explanation", null: false
+    t.bigint "category_id"
+    t.string "brand_name"
+    t.integer "item_status", null: false
+    t.integer "auction_status", default: 1, null: false
+    t.integer "delivery_fee", null: false
+    t.integer "shipping_origin", null: false
+    t.integer "days_until_shipping", null: false
+    t.integer "exhibition_price", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_items_on_category_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", null: false
     t.string "email", null: false
@@ -52,4 +76,6 @@ ActiveRecord::Schema.define(version: 2020_05_24_051516) do
   end
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "images", "items"
+  add_foreign_key "items", "categories"
 end
