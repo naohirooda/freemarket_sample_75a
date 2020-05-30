@@ -87,8 +87,9 @@
 ## categorys_table
 |Column|Type|Options|
 |------|----|-------|
-|name|string|null: false, unique:true|
+|name|string|null: false|
 |ancestry|string|add_index|
 
 ### Association
+- has_ancestory
 - has_many :items
