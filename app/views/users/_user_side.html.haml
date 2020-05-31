@@ -1,0 +1,20 @@
+.user__side
+  .user__side__menu
+    = link_to "マイページ", user_path(current_user.id), class: "link"
+  .user__side__menu
+    = link_to "出品する", new_item_path, class: "link"
+  .user__side__menu
+    = link_to "出品中の商品一覧", "#", class: "link"
+  .user__side__menu
+    = link_to "コメントした商品一覧", "#", class: "link"
+  .user__side__menu
+    = link_to "コメントされた商品一覧", "#", class: "link"
+  .user__side__menu
+    = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "link"
+  .user__side__subtitle 各種設定
+  .user__side__menu
+    = link_to "会員情報の編集", edit_user_registration_path, class: "link"
+  .user__side__menu
+    = link_to "お届先住所の編集", edit_address_path(current_user.id), class: "link"
+  .user__side__menu
+    = link_to "お支払い情報の登録/確認/削除", card_path(current_user.id), data: {"turbolinks" => false}, class: "link"
