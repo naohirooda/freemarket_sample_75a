@@ -8,7 +8,7 @@ class AddressesController < ApplicationController
   def update
     @address = Address.find(params[:id])
     if @address.update(address_params)
-      redirect_to address_edit_done_path
+      redirect_to edit_done_addresses_path
     else
       render :edit
     end

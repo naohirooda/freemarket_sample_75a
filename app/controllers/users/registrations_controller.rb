@@ -37,7 +37,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     if current_user.update(sign_up_params)
       sign_in(current_user, :bypass => true)
-      redirect_to user_edit_done_path
+      redirect_to edit_done_users_path
     else
       render :edit
     end

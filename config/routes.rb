@@ -11,13 +11,18 @@ Rails.application.routes.draw do
   root 'top#index'
 
   resources :card
-  resources :addresses, only: [:edit, :update]
-  resources :users, only: :show
-  resources :card
-  get 'user_edit_done', to: 'users#edit_done'
-  get 'address_edit_done', to: 'addresses#edit_done'
-  get 'card_create_done', to: 'card#create_done'
-  get 'card_destroy_done', to: 'card#destroy_done'
+
+  resources :users, only: :show do
+    collection do
+      get 'edit_done'
+    end
+  end
+
+  resources :addresses, only: [:edit, :update] do
+    collection do
+      get 'edit_done'
+    end
+  end
 
   resources :items do
     collection do
