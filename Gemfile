@@ -83,3 +83,4 @@ gem 'fog-aws'
 gem "jquery-rails"
 gem 'devise'
 gem 'font-awesome-sass'
+gem 'payjp'

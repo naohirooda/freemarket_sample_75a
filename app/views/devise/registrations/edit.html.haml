@@ -7,7 +7,7 @@
         .account__page__main__content--error
           = devise_error_messages!
         .field__title
-          会員情報の登録
+          会員情報の編集
         .field__label
           .name
             = f.label :nickname
@@ -65,4 +65,4 @@
           %br
           ※ 本人情報は正しく入力してください。会員登録後、修正するにはお時間を頂く場合があります。
         .actions
-          = f.submit "お届け先登録へ進む", class: "submit-btn"
+          = f.submit "登録する", class: "submit-btn"
