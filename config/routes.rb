@@ -5,8 +5,25 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'addresses', to: 'users/registrations#new_address'
     post 'addresses', to: 'users/registrations#create_address'
+    get 'sign_out', to: 'users#destroy'
   end
+
   root 'top#index'
+
+  resources :card
+
+  resources :users, only: :show do
+    collection do
+      get 'edit_done'
+    end
+  end
+
+  resources :addresses, only: [:edit, :update] do
+    collection do
+      get 'edit_done'
+    end
+  end
+
   resources :items do
     collection do
       get 'get_category_children', defaults: { fomat: 'json'}

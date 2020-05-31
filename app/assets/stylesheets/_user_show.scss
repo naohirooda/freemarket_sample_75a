@@ -1,0 +1,184 @@
+.user {
+  width: 100%;
+  height: 90vh;
+  padding: 20px 190px;
+  display: flex;
+  box-sizing: border-box;
+  background-color: #f8f8f8;
+
+  &__side {
+    width: 250px;
+    height: 100%;
+
+    &__menu{
+      width: 100%;
+      height: 40px;
+      margin-top: 8px;
+      border: none;
+      cursor: pointer;
+      background-color: #ffffff;
+  
+      .link {
+        text-decoration: none;
+        color: #000000;
+        font-size: 18px;
+        line-height: 40px;
+        font-size: 14px;
+        display: block;
+        padding-left: 10px;
+        border-radius: 4px;
+        
+        &:hover {
+          background-color: #3ccace;
+          color: #fff;
+        }
+      }
+    }
+    &__subtitle {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  }
+  &__body {
+    width: calc(100% - 250px);
+    background-color: #ffffff;
+    margin: 5px 0px 0px 20px;
+    border-radius: 4px;
+
+    &__subtitle {
+      font-size: 18px;
+      font-weight: bold;
+      padding-left: 30px;
+      margin-bottom: 10px;
+    }
+
+    &__bgc {
+      width: 100%;
+      height: 200px;
+      background-color: #3ccace;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      color: #ffffff;
+      padding: 40px 30px;
+
+      .userlisence {
+        width: 200px;
+        height: 120px;
+        background-color: #ffffff;
+        color: #000000;
+        text-align: center;
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 8px;
+        font-weight: bold;
+
+        &--title {
+          font-size: 18px;
+          border-bottom: 2px solid #3ccace;
+          color: #3ccace;
+          padding-bottom: 10px;
+        }
+        &--name {
+          margin-top: 18px;
+          font-size: 20px;
+          color: #333333;
+        }
+      }
+      .prof {
+        margin-left: 50px;
+        font-weight: bold;
+        &__data {
+          margin-top: 5px;
+        }
+      }
+    }
+
+    &__lists {
+      margin: 10px auto;
+      display: flex;
+      justify-content: center;
+      padding-left: 20px;
+  
+      &__list{
+        width: 220px;
+        height: 230px;
+        display: inline-block;
+        @include opacity();
+        position: relative;
+        margin-right: 20px;
+        
+        a{
+          background-color: #fff;
+          display: inline-block;
+          text-decoration: none;
+          position: relative;
+  
+          figure{
+            width: 220px;
+            height: 150px;
+            position: relative;
+            overflow: hidden;
+            margin: 0;
+            z-index: auto;
+  
+            img{
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              width: 100%;
+              z-index: auto;
+              height: 150px;
+              object-fit: cover;
+            }
+          }
+        }
+        .list__body{
+          color:#333;
+          padding: 16px;
+          height: 80px;
+          width: 220px;
+  
+          h3{
+            overflow: hidden;
+            line-height: 1.5;
+            font-size: 16px;
+            text-align: left;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+        .list__price{
+          font-size: 16px;
+          color: #333333;
+          ul{
+            @include flex_align-c();
+            justify-content: space-between;
+            list-style: none;
+            li{
+              color: #333333;
+              .fas{
+                display: inline-block;
+                font-size: inherit;
+                text-rendering: auto;
+                -webkit-font-smoothing: antialiased;
+                font: normal normal normal 14px/1 "Font Awesome 5 Free";
+                &::before{
+                  content: "\f005";
+                }
+              }
+            }
+          }
+          p{
+            font-size: 10px;
+            text-align: left;
+            color: #333333;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+  }
+}

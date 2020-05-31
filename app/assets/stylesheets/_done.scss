@@ -1,0 +1,34 @@
+.done {
+  width: calc(100% - 250px);
+  height: 90vh;
+  padding: 100px;
+
+  &__title {
+    font-size: 22px;
+    text-align: center;
+    font-weight: bold;
+    margin: 0 auto;
+  }
+
+  &__backlink{
+    width: 250px;
+    height: 50px;
+    background-color: #3ccace;
+    display: block;
+    margin: 15px auto;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+
+    .link {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 18px;
+      line-height: 50px;
+    }
+  }
+}
+#fullsize {
+  width: 100%;
+}
