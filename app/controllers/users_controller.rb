@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :move_to_root, except: [:show]
+  before_action :move_to_root, except: [:show, :destroy]
 
   def show
     @user = User.find(params[:id])
