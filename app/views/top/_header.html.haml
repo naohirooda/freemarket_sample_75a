@@ -22,7 +22,7 @@
       - if user_signed_in?
         %ul.list-right
           %li.list-right__log-in
-            = link_to user_path(current_user.id), class: "right-btn" do
+            = link_to user_path(current_user.id), data: {"turbolinks" => false}, class: "right-btn" do
               マイページ
           %li.user__right__log-in
             = link_to destroy_user_session_path, method: :delete, class: "right-btn"  do

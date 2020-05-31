@@ -32,13 +32,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit
-    @user = User.find(current_user.id)
   end
 
   def update
-    user = User.find(current_user.id)
-    if user.update(sign_up_params)
-      sign_in(user, :bypass => true)
+    if current_user.update(sign_up_params)
+      sign_in(current_user, :bypass => true)
       redirect_to user_edit_done_path
     else
       render :edit

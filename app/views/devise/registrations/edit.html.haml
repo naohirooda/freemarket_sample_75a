@@ -2,7 +2,7 @@
   .account__page__header
     = link_to image_tag("logo/logo.png", alt: "logo"), root_path
   .account__page__main
-    = form_for @user, url: user_registration_path do |f|
+    = form_for current_user, url: user_registration_path do |f|
       .account__page__main__content
         .account__page__main__content--error
           = devise_error_messages!

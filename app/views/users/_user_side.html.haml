@@ -17,4 +17,4 @@
   .user__side__menu
     = link_to "お届先住所の編集", edit_address_path(current_user.id), class: "link"
   .user__side__menu
-    = link_to "お支払い情報の登録/確認/削除", card_path(current_user.id), class: "link"
+    = link_to "お支払い情報の登録/確認/削除", card_path(current_user.id), data: {"turbolinks" => false}, class: "link"

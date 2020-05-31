@@ -1,10 +1,10 @@
 class CardController < ApplicationController
   before_action :move_to_root
+  before_action :set_card, only: [:new, :show, :destroy]
   require "payjp"
 
   def new
-    card = Card.where(user_id: current_user.id)
-    redirect_to card_path(current_user.id) if card.exists?
+    redirect_to card_path(current_user.id) if @card.present?
   end
 
   def create
@@ -26,13 +26,12 @@ class CardController < ApplicationController
   end
 
   def show
-    card = Card.find_by(user_id: current_user.id)
-    if card.blank?
+    if @card.blank?
       redirect_to new_card_path 
     else
       Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_SECRET_KEY]
-      customer = Payjp::Customer.retrieve(card.customer_id)
-      @card_info = customer.cards.retrieve(card.card_id)
+      customer = Payjp::Customer.retrieve(@card.customer_id)
+      @card_info = customer.cards.retrieve(@card.card_id)
       case @card_info.brand
         when "Visa"
           @card_src = "visa.gif"
@@ -51,13 +50,12 @@ class CardController < ApplicationController
   end
 
   def destroy
-    card = Card.find_by(user_id: current_user.id)
-    if card.blank?
+    if @card.blank?
     else
       Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_SECRET_KEY]
-      customer = Payjp::Customer.retrieve(card.customer_id)
+      customer = Payjp::Customer.retrieve(@card.customer_id)
       customer.delete
-      card.delete
+      @card.delete
     end
       redirect_to user_path(current_user.id)
   end
@@ -65,5 +63,9 @@ class CardController < ApplicationController
   private
   def move_to_root
     redirect_to root_path unless user_signed_in?
+  end
+
+  def set_card
+    @card = Card.find_by(user_id: current_user.id)
   end
 end
