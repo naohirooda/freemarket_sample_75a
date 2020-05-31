@@ -24,7 +24,7 @@
           %li.list-right__log-in
             = current_user.nickname
           %li.list-right__sign-up
-            = link_to destroy_user_session_path, method: :delete, class: "right-btn" do
+            = link_to destroy_user_session_path, class: "right-btn" do
               ログアウト
       - else
         %ul.list-right
@@ -32,5 +32,5 @@
             = link_to new_user_session_path, class: "right-btn" do
               ログイン
           %li.list-right__sign-up
-            = link_to new_user_registration_path, class: "right-btn" do
+            = link_to new_user_registration_path, class: "right-btn",data: {"turbolinks" => false}  do
               新規会員登録

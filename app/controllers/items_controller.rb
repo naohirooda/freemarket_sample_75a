@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
-
-  before_action :category_parent_array, only: [:new, :create]
+before_action :category_parent_array, only: [:new, :create]
 
   def index
     @items = Item.includes(:images).order('created_at DESC')
@@ -34,6 +33,9 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @user = User.find(@item.user_id)
+    @images = Image.where(item_id: params[:id])
+    @images_first = Image.where(item_id: params[:id]).first
     @category_id = @item.category_id
     @category_parent = Category.find(@category_id).parent.parent
     @category_child = Category.find(@category_id).parent
@@ -48,7 +50,7 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.require(:item).permit(:name, :item_explanation, :category_id, :item_status, :auction_status, :delivery_fee, :shipping_origin, :exhibition_price,:brand_name, :days_until_shipping, images_attributes:  [:image, :_destroy, :id])
+    params.require(:item).permit(:name, :item_explanation, :category_id, :item_status, :auction_status, :delivery_fee, :shipping_origin, :exhibition_price,:brand_name, :days_until_shipping, images_attributes:  [:image, :_destroy, :id]).merge(user_id: current_user.id)
   end
  
   def category_parent_array
