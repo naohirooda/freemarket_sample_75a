@@ -12,11 +12,17 @@ Rails.application.routes.draw do
 
   resources :card
   resources :addresses, only: [:edit, :update]
-  resources :items, except: :show
   resources :users, only: :show
   resources :card
   get 'user_edit_done', to: 'users#edit_done'
   get 'address_edit_done', to: 'addresses#edit_done'
   get 'card_create_done', to: 'card#create_done'
   get 'card_destroy_done', to: 'card#destroy_done'
+
+  resources :items do
+    collection do
+      get 'get_category_children', defaults: { fomat: 'json'}
+      get 'get_category_grandchildren', defaults: { fomat: 'json'}
+    end
+  end
 end
