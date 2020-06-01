@@ -1,6 +1,6 @@
 class CardController < ApplicationController
   before_action :move_to_root
-  before_action :set_card, only: [:new, :show, :destroy]
+  before_action :set_card, only: [:new, :show, :destroy, :buy]
   require "payjp"
 
   def new
@@ -66,7 +66,36 @@ class CardController < ApplicationController
   def delete_done
   end
 
-
+  def buy
+    @item = Item.find(params[:id])
+    @address = Address.where(user_id: current_user.id)
+    if user_signed_in?
+      @user = current_user
+      Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_SECRET_KEY]
+      if @card.blank?
+        @card_info = ""
+      else
+        customer = Payjp::Customer.retrieve(@card.customer_id)
+        @card_info = customer.cards.retrieve(@card.card_id)
+        case @card_info.brand
+          when "Visa"
+            @card_src = "visa.gif"
+          when "JCB"
+            @card_src = "jcb.gif"
+          when "MasterCard"
+            @card_src = "mc.png"
+          when "American Express"
+            @card_src = "amex.gif"
+          when "Diners Club"
+            @card_src = "diners.gif"
+          when "Discover"
+            @card_src = "discover.gif"
+        end
+      end
+    else
+      redirect_to root_path
+    end
+  end
 
   private
   def move_to_root

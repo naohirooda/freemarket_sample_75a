@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :move_to_root, except: [:show, :destroy]
-  before_action :set_user_items,except: :edit_done
+  before_action :move_to_root,   except: [:show, :destroy]
+  before_action :set_user_items, except: [:edit_done, :destroy]
 
   def index
     @sale_items = @items.where(auction_status: "1")
