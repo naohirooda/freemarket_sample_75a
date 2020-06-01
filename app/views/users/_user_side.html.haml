@@ -2,7 +2,7 @@
   .user__side__menu
     = link_to "マイページ", user_path(current_user.id), class: "link"
   .user__side__menu
-    = link_to "出品する", new_item_path, class: "link"
+    = link_to "出品する", new_item_path, data: {"turbolinks" => false} , class: "link"
   .user__side__menu
     = link_to "出品中の商品一覧", "#", class: "link"
   .user__side__menu
