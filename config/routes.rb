@@ -10,10 +10,16 @@ Rails.application.routes.draw do
 
   root 'top#index'
 
-  resources :card
-
-  resources :users, only: :show do
+  resources :card do
     collection do
+      get 'registration_done'
+      get 'delete_done'
+    end
+  end
+
+  resources :users, only: [:index, :show] do
+    collection do
+      get 'sold_items'
       get 'edit_done'
     end
   end
@@ -28,6 +34,7 @@ Rails.application.routes.draw do
     collection do
       get 'get_category_children', defaults: { fomat: 'json'}
       get 'get_category_grandchildren', defaults: { fomat: 'json'}
+      get 'post_done'
     end
   end
 end

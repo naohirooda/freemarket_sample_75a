@@ -178,6 +178,26 @@
             font-weight: normal;
           }
         }
+        .list__sold{
+          width: 0;
+          height: 0;
+          border-top: 40px solid #3ccace;
+          border-right: 40px solid transparent;
+          border-bottom: 40px solid transparent;
+          border-left: 40px solid #3ccace;
+          z-index:100;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          &__inner{
+            color: #fff;
+            transform: rotate(-45deg);
+            font-size: 20px;
+            margin:-16px 0px 0px -32px;
+            letter-spacing: 2px;
+            font-weight: bold;
+          }
+        }
       }
     }
   }
