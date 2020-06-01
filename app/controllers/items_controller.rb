@@ -21,11 +21,14 @@ before_action :category_parent_array, only: [:new, :create]
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to root_path
+      redirect_to  post_done_items_path
     else
       @item.images.new
       render :new
     end
+  end
+
+  def  post_done
   end
 
   def edit

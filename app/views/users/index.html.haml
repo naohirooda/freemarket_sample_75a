@@ -1,0 +1,25 @@
+= render "top/header"
+.item__body
+  .item__body__title
+    出品中の商品一覧
+  .item__body__lists
+    - @sale_items.each do |item|
+      .item__body__lists__list
+        = link_to item_path(item.id) do
+          %figure.list__img
+            = image_tag item.images.first.image.url
+          .list__body
+            %h3.name
+              = item.name
+            .list__price
+              %ul
+                %li
+                  = item.exhibition_price.to_s(:delimited)
+                  円
+                %li
+                  = icon('fa', 'star')
+                  0
+              %p (税込)
+= render "top/lower-photo"
+= render "top/footer"
+= render "top/btn"
