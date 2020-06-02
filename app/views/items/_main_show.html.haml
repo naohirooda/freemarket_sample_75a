@@ -1,0 +1,102 @@
+.mainShow
+  .mainShow__box
+    .mainShow__box__content
+      .mainShow__box__content__top
+        .mainShow__box__content__top__itemBox
+          %h2= @item.name
+          .mainShow__box__content__top__itemBox__images
+            %ul.image__main
+              %li.image__main__list
+                = image_tag(@images_first.image.url, class: "main__photo")
+                .image__box
+                  %ul.image__sub
+                    - @images.each do |img|
+                      %li.image__sub__list
+                        = image_tag(img.image.url, class: "sub__photo", size: "75x75")
+          .mainShow__box__content__top__itemBox__price
+            %span.price
+              = @item.exhibition_price.to_s(:delimited)
+              円
+            .mainShow__box__content__top__itemBox__price__detail
+              %span
+                (税込)
+              %span
+                送料込み 
+          .mainShow__box__content__top__itemBox__explanation
+            = @item.item_explanation
+          .mainShow__box__content__top__itemBox__table
+            %table 
+              %tr 
+                %th 出品者
+                %td= @user.nickname
+              %tr 
+                %th カテゴリー
+                - if @category_id == 46 or @category_id == 74 or @category_id == 134 or @category_id == 142 or @category_id == 147 or @category_id == 150 or @category_id == 158
+                  %td
+                    = link_to "#{@category_child.name}","#"
+                    %br= link_to "#{@category_grandchild.name}","#" 
+                -else
+                  %td
+                    = link_to "#{@category_parent.name}","#"
+                    %br= link_to "#{@category_child.name}","#"
+                    = link_to "#{@category_grandchild.name}","#"
+              %tr
+                %th ブランド
+                %td= @item.brand_name
+              %tr
+                %th 商品のサイズ
+                %td
+              %tr
+                %th 商品の状態
+                %td= @item.item_status
+              %tr
+                %th 配送料の負担
+                %td= @item.delivery_fee
+              %tr
+                %th 発送元の地域
+                %td= link_to "#{@item.shipping_origin}","#"
+              %tr
+                %th 発送日の目安
+                %td= @item.days_until_shipping
+          .mainShow__box__content__top__itemBox__option
+            %ul.like
+              %li.like__list
+                = icon('fa', 'star')
+                お気に入り 0
+            %ul.report
+              %li.report__list
+                = link_to "#" do
+                  = icon('fa', 'flag')
+                  不適切な商品の通報
+        .mainShow__box__content__top__editDeleteBuy
+          - if current_user == @user
+            = link_to "商品の編集", "#", class: "edit"
+            = link_to "商品の削除", "#", class: "destory"
+          - elsif user_signed_in?
+            = link_to "購入画面に進む", "#", class: "pay"
+          - else
+        .mainShow__box__content__top__commentBox
+          .mainShow__box__content__top__commentBox__contents
+          = form_with url: root_path, class: "new_comment" do |f|
+            = f.text_area "", required: "required", class: "text_area"
+            %p.note
+              相手のことを考え丁寧なコメントを心がけましょう。
+              %br 不快な言葉遣いなどは利用制限や退会処分となることがあります。
+            %button.comment_btn{type:"submit"}
+              = icon('fa', 'comment')
+              コメントする
+        %ul.links
+          %li.links__before
+            = link_to "#", class: "angle__left" do
+              = icon('fa', 'angle-left')
+              %span 前の商品
+          %li.links__after
+            = link_to "#", class: "angle__right" do
+              %span 後ろの商品
+              = icon('fa', 'angle-right')
+      .mainShow__box__content__related
+        - if @category_id == 46 or @category_id == 74 or @category_id == 134 or @category_id == 142 or @category_id == 147 or @category_id == 150 or @category_id == 158
+          = link_to "#{@category_child.name}をもっと見る", "#", class: "related"
+        - else
+          = link_to "#{@category_parent.name}をもっと見る", "#", class: "related"
+

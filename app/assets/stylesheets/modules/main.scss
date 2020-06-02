@@ -293,6 +293,7 @@
               }
             }
             .list__body{
+              width: 220px;
               background-color: white;
               color:#333;
               padding: 16px;
@@ -301,6 +302,8 @@
                 line-height: 1.5;
                 font-size: 16px;
                 text-align: left;
+                text-overflow: ellipsis;
+                white-space: nowrap;
               }
             }
             .list__price{
