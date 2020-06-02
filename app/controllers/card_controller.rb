@@ -1,6 +1,7 @@
 class CardController < ApplicationController
   before_action :move_to_root
-  before_action :set_card, only: [:new, :show, :destroy, :buy]
+  before_action :set_card, only: [:new, :show, :destroy, :buy, :pay]
+  before_action :set_item, only: [:buy, :pay]
   require "payjp"
 
   def new
@@ -67,10 +68,8 @@ class CardController < ApplicationController
   end
 
   def buy
-    @item = Item.find(params[:id])
     @address = Address.where(user_id: current_user.id)
     if user_signed_in?
-      @user = current_user
       Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_SECRET_KEY]
       if @card.blank?
         @card_info = ""
@@ -97,6 +96,29 @@ class CardController < ApplicationController
     end
   end
 
+  def pay
+    if @item.auction_status == "売り切れ"
+      redirect_to buy_card_path(@item.id)
+    else
+      if current_user.card.present?
+        Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_SECRET_KEY]
+        charge = Payjp::Charge.create(
+          amount: @item.exhibition_price,
+          customer: Payjp::Customer.retrieve(@card.customer_id),
+          currency: 'jpy'
+          )
+        @item.update!(auction_status: 2)
+      else
+        Payjp::Charge.create(
+          amount: @item.exhibition_price,
+          card: params['payjp-token'],
+          currency: 'jpy'
+          )
+        @item.update!(auction_status: 2)
+      end
+    end
+  end
+
   private
   def move_to_root
     redirect_to root_path unless user_signed_in?
@@ -104,5 +126,9 @@ class CardController < ApplicationController
 
   def set_card
     @card = Card.find_by(user_id: current_user.id)
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
   end
 end
