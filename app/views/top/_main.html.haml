@@ -119,7 +119,7 @@
     %h2 ピックアップブランド
     .main__category__box
       .main__category__box__head
-        = link_to "新規投稿商品", items_path, class: "title"
+        = link_to "アーカイバ", "#", class: "title"
     .main__category__lists
       - @rand_items.each do |item|
         -if item.auction_status == '売り切れ'
