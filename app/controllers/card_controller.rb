@@ -96,8 +96,8 @@ class CardController < ApplicationController
   end
 
   def pay
-    if @item == "売り切れ"
-      redirect_to buy_card_path(@item.id)
+    if @item.auction_status == "売り切れ"
+      redirect_to buy_card_path(@item)
     else
       if current_user.card.present?
         Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_SECRET_KEY]
