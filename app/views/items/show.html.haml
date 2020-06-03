@@ -1,57 +1,6 @@
 = render 'top/header'
-%h1 showページ
-%h3 商品名： #{@item.name}
-%h3 写真
-.images_first
-  = image_tag(@images_first.image.url, size:"320x240")
-.images
-  - @images.each do |img|
-    = image_tag(img.image.url)
-%h3 価格
-.price
-  = @item.exhibition_price.to_s(:delimited)
-  円
-%h3 説明
-.explanetion
-  = @item.item_explanation
-%h3 出品者
-.nickname
-  = @user.nickname
-- if @category_id == 46 or @category_id == 74 or @category_id == 134 or @category_id == 142 or @category_id == 147 or @category_id == 150 or @category_id == 158
-  %h3 カテゴリー
-  .category__parent
-    = @category_child.name
-  .category__child
-    = @category_grandchild.name
-- else
-  %h3 カテゴリー
-  .category__parent
-    = @category_parent.name
-  .category__child
-    = @category_child.name
-  .category__grandchild
-    = @category_grandchild.name
-%h3 ブランド
-.brand
-  = @item.brand_name
-%h3 商品の状態
-.status
-  = @item.item_status
-%h3 発送料の負担
-.fee
-  = @item.delivery_fee
-%h3 発送元の地域
-.origin
-  = @item.shipping_origin
-%h3 発送の目安
-.day
-  = @item.days_until_shipping
-- if current_user == @user
-  = link_to "商品の編集", "#",class: "edit"
-  = link_to "商品の削除", "#",class: "destory"
-- elsif user_signed_in?
-  = link_to "購入画面に進む", buy_card_path(@item.id), data: {"turbolinks" => false}  ,class: "pay"
-- else
-
+= render 'items/nav'
+= render 'items/main_show'
 = render 'top/lower-photo'
 = render 'top/footer'
+= render "top/btn"
