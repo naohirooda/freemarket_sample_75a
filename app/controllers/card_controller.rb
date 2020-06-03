@@ -68,7 +68,6 @@ class CardController < ApplicationController
   end
 
   def buy
-    @address = Address.where(user_id: current_user.id)
     if user_signed_in?
       Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_SECRET_KEY]
       if @card.blank?

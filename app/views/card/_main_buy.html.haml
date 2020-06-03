@@ -93,9 +93,10 @@
                   .buy__user__info
                     = current_user.last_name
                     = current_user.first_name
-              %section.buy__content__buy__user__info
-                .buy__btn
-                  = link_to '購入する', pay_card_path(@item.id), method: :post, class: 'link'
+              - if @card_info.present?
+                %section.buy__content__buy__user__info
+                  .buy__btn
+                    = link_to '購入する', pay_card_path(@item.id), method: :post, class: 'link'
     .main-pay__fotter
       .main-pay__fotter_nav
         %ul.clearfix
