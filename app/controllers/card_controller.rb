@@ -96,7 +96,7 @@ class CardController < ApplicationController
   end
 
   def pay
-    if @item.auction_status == "売り切れ"
+    if @item == "売り切れ"
       redirect_to buy_card_path(@item.id)
     else
       if current_user.card.present?
