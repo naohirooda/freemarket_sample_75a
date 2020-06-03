@@ -1,134 +1,92 @@
-* {
-  box-sizing: border-box;
-  .main-pay{
-    background-color: #f5f5f5;
-    padding: 30px;
-    &__main{
-      background-color: #fff;
-      width: 700px;
-      margin: 0 auto;
-      border-style: solid;
-      border-width: 0;
-      .buy__item__content{
-        padding: 32px;
-        color: #333;
-        font-size: 22px;
-        text-align: center;
-        .buy__item__title{
-          font-size: 30px;
-        }
-        .buy__item__content__inner{
-          display: flex;
-          max-width: 343px;
-          margin: 0 auto;
-          .buy__item__image{
-            img {
-              width: 80px;
-              height: 80px;
-              min-width: 80px;
-            }
-          }
-          .buy__item__detail{
-            margin-left: 16px;
-            .buy-item-name{
-              font-size: 14px;
-              padding-bottom: 8px;
-              text-align: left;
-              line-height: 1.5;
-            }
-            .buy-price{
-              text-align: left;
-              font-size: 15px;
-              display: flex;
-              font-weight: bold;
-              .price{
-                font-size: inherit;
-              }
-              .delivery_fee{
-                font-size: 12px;
-              }
-            }
-          }
-        }
-        .buy__item__user__info{
-          max-width: 343px;
-          margin: 0 auto;
-          .buy__content__table{
-            .buy__price__cell{
-              display: flex;
-              justify-content: space-between;
-              width: 100%;
-              &_label{
-                font-size: 18px;
-                text-align: left;
-              }
-              .buy__price{
-              text-align: right;
-              }
-            }
-            .buy__content__buy__user__info{
-              padding: 32px 0;
-              img {
-                height: 40px;
-              }
-              .buy__content__inner{
-                .buy__user__info__form--buynow {
-                  margin-top: 30px;
-                  &--text {
-                    margin-top: 15px;
-                    font-size: 10px;
-                  }
-                }
-                .buy__user__info__title{
-                  text-align: left;
-                  font-size: 14px;
-                    .buy__user__info__form{
-                    display: flex;
-                    .icon__plus{
-                      text-decoration: none;
-                      color: #3CCACE;
-                      padding-top: 2px;
-                      margin-right: 2px;
-                    }
-                    .buy__register__text{
-                      text-decoration: none;
-                      color: #3CCACE;
-                    }
-                    &:hover{
-                      text-decoration: underline;
-                    }
-                  }
-                }
-              }
-              .buy__btn{
-                background-color:#888;
-                width: 100%;
-                line-height: 48px;
-                font-size: 14px;
-                font-weight: 600;
-                a {
-                  text-decoration: none;
-                  color: #fff;
-                  display: block;
-                  width: 100%;
-                }
-              }
-            }
-          }
+.buy {
+  background-color: #f8f8f8;
+  width: 100%;
+  padding: 30px;
+
+  &__main{
+    background-color: #ffffff;
+    width: 700px;
+    padding: 50px;
+    margin: 0 auto;
+
+    &__title {
+      font-size: 22px;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 60px;
+      color: #3ccace;
+    }
+    #soldout {
+      color: red;
+    }
+    &__item {
+      display: flex;
+      justify-content: center;
+
+      &--data {
+        margin-left: 30px;
+
+        .name {
+          font-size: 20px;
+          font-weight: bold;
+          margin-bottom: 5px;
         }
       }
     }
-    &__fotter{
+    &__claim {
+      display: flex;
+      justify-content: space-between;
+      font-size: 24px;
+      font-weight: bold;
+      margin: 60px auto;
+    }
+
+    &__newlink {
+      display: flex;
+      margin-bottom: 60px;
+
+      .icon {
+        text-decoration: none;
+        color: #3CCACE;
+        padding-top: 3px;
+        margin-right: 2px;
+      }
+      .text {
+        text-decoration: none;
+        color: #3CCACE;
+      }
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+    &__card {
+      img {
+        height: 40px;
+        margin-bottom: 60px;
+      } 
+    }
+    &__buynow {
+      &--text {
+        margin: 12px auto 60px;
+        font-size: 12px;
+      }
+    }
+    &__btn {
+      margin-top: 60px;
       text-align: center;
-      &_nav{
-        .clearfix{
-          .fotter-link{
-            text-decoration: none;
-            color: #333;
-            font-size: 10px;
-          }
-        }
+      a {
+        background-color:#888;
+        width: 100%;
+        line-height: 48px;
+        font-size: 14px;
+        text-decoration: none;
+        color: #fff;
+        display: block;
+        width: 100%;
       }
     }
   }
+}
+#short {
+  height: 50vh;
 }
