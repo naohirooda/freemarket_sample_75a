@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
 before_action :category_parent_array, only: [:new, :create]
+before_action :set_item, only: [:show, :destroy]
 
   def index
     @items = Item.includes(:images).order('created_at DESC')
@@ -29,13 +30,13 @@ before_action :category_parent_array, only: [:new, :create]
   end
 
   def  post_done
+    @item = Item.where(user_id: current_user.id).last
   end
 
   def edit
   end
 
   def show
-    @item = Item.find(params[:id])
     @user = User.find(@item.user_id)
     @images = Image.where(item_id: params[:id])
     @images_first = Image.where(item_id: params[:id]).first
@@ -47,8 +48,10 @@ before_action :category_parent_array, only: [:new, :create]
 
   def update
   end
-
+  
   def destroy
+    @item.destroy
+    redirect_to  delete_done_items_path
   end
 
   private
@@ -59,5 +62,9 @@ before_action :category_parent_array, only: [:new, :create]
   def category_parent_array
     @category_parent_array = Category.where(ancestry: nil).each do |parent|
     end
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
   end
 end
