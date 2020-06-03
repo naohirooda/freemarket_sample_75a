@@ -10,10 +10,14 @@ Rails.application.routes.draw do
 
   root 'top#index'
 
-  resources :card do
+  resources :card, except: :index do
     collection do
       get 'registration_done'
       get 'delete_done'
+    end
+    member do
+      get 'buy'
+      post 'pay'
     end
   end
 

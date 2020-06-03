@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :card do
-    user_id { 1 }
-    customer_id { "MyString" }
-    card_id { "MyString" }
+    customer_id { "abcdefghijklmnop" }
+    card_id     { "abcdefghijklmnop" }
+    user
   end
 end

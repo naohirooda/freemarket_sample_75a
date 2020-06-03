@@ -38,17 +38,7 @@ describe Address do
       address.valid?
       expect(address.errors[:preficture]).to include("を入力してください")
     end
-    it "存在しないprefictureの場合は登録できないこと" do
-      address = build(:address, preficture: "test県")
-      address.valid?
-      expect(address.errors[:preficture]).to include("は存在しません")
-    end
-    it "都・道・府・県が含まれていないprefictureは登録できない" do
-      address = build(:address, preficture: "福岡")
-      address.valid?
-      expect(address.errors[:preficture]).to include("は存在しません")
-    end
-    it "都・道・府・県が含まれているprefictureは登録できること" do
+    it "prefictureが含まれているprefictureは登録できること" do
       address = build(:address, preficture: "東京都")
       expect(address).to be_valid
     end

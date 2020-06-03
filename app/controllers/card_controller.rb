@@ -1,6 +1,7 @@
 class CardController < ApplicationController
   before_action :move_to_root
-  before_action :set_card, only: [:new, :show, :destroy]
+  before_action :set_card, only: [:new, :show, :destroy, :buy, :pay]
+  before_action :set_item, only: [:buy, :pay]
   require "payjp"
 
   def new
@@ -66,7 +67,56 @@ class CardController < ApplicationController
   def delete_done
   end
 
+  def buy
+    if user_signed_in?
+      Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_SECRET_KEY]
+      if @card.blank?
+        @card_info = ""
+      else
+        customer = Payjp::Customer.retrieve(@card.customer_id)
+        @card_info = customer.cards.retrieve(@card.card_id)
+        case @card_info.brand
+          when "Visa"
+            @card_src = "visa.gif"
+          when "JCB"
+            @card_src = "jcb.gif"
+          when "MasterCard"
+            @card_src = "mc.png"
+          when "American Express"
+            @card_src = "amex.gif"
+          when "Diners Club"
+            @card_src = "diners.gif"
+          when "Discover"
+            @card_src = "discover.gif"
+        end
+      end
+    else
+      redirect_to root_path
+    end
+  end
 
+  def pay
+    if @item.auction_status == "売り切れ"
+      redirect_to buy_card_path(@item)
+    else
+      if current_user.card.present?
+        Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_SECRET_KEY]
+        charge = Payjp::Charge.create(
+          amount: @item.exhibition_price,
+          customer: Payjp::Customer.retrieve(@card.customer_id),
+          currency: 'jpy'
+          )
+        @item.update!(auction_status: 2)
+      else
+        Payjp::Charge.create(
+          amount: @item.exhibition_price,
+          card: params['payjp-token'],
+          currency: 'jpy'
+          )
+        @item.update!(auction_status: 2)
+      end
+    end
+  end
 
   private
   def move_to_root
@@ -75,5 +125,9 @@ class CardController < ApplicationController
 
   def set_card
     @card = Card.find_by(user_id: current_user.id)
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
   end
 end
