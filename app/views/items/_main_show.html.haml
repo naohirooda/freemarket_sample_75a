@@ -73,7 +73,7 @@
             = link_to "商品の編集", "#", class: "edit"
             = link_to "商品の削除", "#", class: "destory"
           - elsif user_signed_in?
-            = link_to "購入画面に進む", "#", class: "pay"
+            = link_to "購入画面に進む", buy_card_path(@item.id), data: {"turbolinks" => false} , class: "pay"
           - else
         .mainShow__box__content__top__commentBox
           .mainShow__box__content__top__commentBox__contents
