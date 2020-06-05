@@ -23,8 +23,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show] do
     collection do
-      get 'be_commented'
-      get 'to_comments'
+      get 'commented_items'
       get 'sold_items'
       get 'edit_done'
     end
