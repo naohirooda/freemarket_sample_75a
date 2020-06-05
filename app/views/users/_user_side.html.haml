@@ -10,9 +10,9 @@
   .user__side__menu
     = link_to "売却済の商品一覧", sold_items_users_path, class: "link"
   .user__side__menu
-    = link_to "コメントした商品一覧　　未実装", "#", class: "link"
+    = link_to "コメントした商品一覧", to_comments_users_path, class: "link"
   .user__side__menu
-    = link_to "コメントされた商品一覧　未実装", "#", class: "link"
+    = link_to "コメントされた商品一覧", be_commented_users_path, class: "link"
   .user__side__subtitle 各種設定
   .user__side__menu
     = link_to "会員情報の編集", edit_user_registration_path, class: "link"

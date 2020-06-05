@@ -38,6 +38,8 @@ before_action :show_all_instance, only: [:show, :destroy]
   end
 
   def show
+    @comment = Comment.new
+    @comments = @item.comments.includes(:user)
   end
 
   def update

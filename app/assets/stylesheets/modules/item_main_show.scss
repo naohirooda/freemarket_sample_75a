@@ -154,7 +154,122 @@
           background-color: #fff;
           margin: 10px 0;
           text-align: center;
+
+          .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3ccace;
+            margin-bottom: 10px;
+          }
+
+          &__comments__comment {
+            padding: 10px;
+
+            .profile {
+              display: flex;
+              justify-content: flex-end;
+              &__name {
+                font-weight: bold;
+                margin-right: 20px;
+              }
+              .image {
+                font-size: 50px;
+                margin-bottom: 5px;
+              }
+              .seller_or_buyer {
+                font-size: 12px;
+                padding: 2px;
+                border-radius: 8px;
+                background-color: #3ccace;
+                color: #fff;
+              }
+            }
+            .comment {
+              background-color: #dedede;
+              width: 91%;
+              padding: 8px;
+              margin-top: -55px;
+              border-radius: 12px;
+
+              &__text {
+                text-align: left;
+                word-break: break-all;
+              } 
+              &__bottom {
+                display: flex;
+                justify-content: space-between;
+                padding: 0 20px;
+                margin-top: 5px;
+                color: #6d6d6d;
+                font-size: 12px;
+
+                a {
+                  text-decoration: none;
+                  color: #6d6d6d;
+                }
+              }
+            }
+            &--other {
+              padding: 10px;
+              display: flex;
+
+              .profile {
+                display: flex;
+                justify-content: flex-start;
+                &__name {
+                  font-weight: bold;
+                  margin-left: 20px;
+                }
+                .image {
+                  font-size: 50px;
+                  margin-bottom: 5px;
+                }
+                .seller_or_buyer {
+                  font-size: 12px;
+                  padding: 2px;
+                  border-radius: 8px;
+                  background-color: #3ccace;
+                  color: #fff;
+                }
+              }
+              .comment {
+                background-color: #cdf4f4;
+                width: 100%;
+                padding: 8px;
+                margin: 25px 0px 0px -40px;
+                border-radius: 12px;
+                max-width: 570px;
+  
+                &__text {
+                  text-align: left;
+                  width: 100%;
+                  word-break: break-all;
+                } 
+                &__bottom {
+                  display: flex;
+                  justify-content: space-between;
+                  padding: 0 20px;
+                  margin-top: 5px;
+                  color: #6d6d6d;
+                  font-size: 12px;
+
+                  a {
+                    text-decoration: none;
+                    color: #6d6d6d;
+                  }
+                }
+                &__icon {
+                  display: flex;
+                  .flag {
+                    margin-right: 10px;
+                  }
+                }
+              }
+            }
+          }
           .new_comment{
+            margin-top: 40px;
+
             .text_area{
               width: 100%;
               min-height: 104px;
