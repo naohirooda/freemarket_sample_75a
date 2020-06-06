@@ -1,5 +1,4 @@
 $(function(){
-  console.log ("ok");
   function buildHTML(comment){
     var html = `<div class="mainShow__box__content__top__commentBox__comments__comment">
                   <div class="profile">

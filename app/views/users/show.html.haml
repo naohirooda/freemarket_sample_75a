@@ -1,4 +1,6 @@
 = render "top/header"
+- breadcrumb :user_show
+= render "items/nav"
 - if user_signed_in?
   .user
     = render 'user_side'
