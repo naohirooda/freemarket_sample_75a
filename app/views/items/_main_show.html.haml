@@ -31,7 +31,7 @@
                 %td= @user.nickname
               %tr 
                 %th カテゴリー
-                - if @category_id == 46 or @category_id == 74 or @category_id == 134 or @category_id == 142 or @category_id == 147 or @category_id == 150 or @category_id == 158
+                - if [46, 74, 134, 142, 147, 150, 158].include?(@category_id)
                   %td
                     = link_to "#{@category_child.name}","#"
                     %br= link_to "#{@category_grandchild.name}","#" 
@@ -144,7 +144,7 @@
               %span 後ろの商品
               = icon('fa', 'angle-right')
       .mainShow__box__content__related
-        - if @category_id == 46 or @category_id == 74 or @category_id == 134 or @category_id == 142 or @category_id == 147 or @category_id == 150 or @category_id == 158
+        - if [46, 74, 134, 142, 147, 150, 158].include?(@category_id)
           = link_to "#{@category_child.name}をもっと見る", "#", class: "related"
         - else
           = link_to "#{@category_parent.name}をもっと見る", "#", class: "related"
