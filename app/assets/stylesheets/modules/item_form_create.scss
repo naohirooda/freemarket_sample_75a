@@ -1,0 +1,193 @@
+
+.new__page__header{
+  height: 75px;
+  width: 100%;
+  background-color: #FFFFFF;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 8px;
+  box-sizing: border-box;
+  box-shadow: 0 3px 3px 0 rgba(0,0,0,0.16);
+  img {
+    width: 150px;
+    cursor: pointer;
+  }
+}
+.new_item, .edit_item{
+  background-color: #FFFFFF;
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding-top: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  .form__label{
+    display: flex;
+    align-items: center;
+    margin-bottom: 7px;
+    margin-top: 10px;
+    .lavel__Required{
+    background-color: red;
+    color: white;
+    width: 50px;
+    text-align: center;
+    }
+  }
+  #image-box-1{
+    label{
+    display: flex;
+    flex-wrap: wrap;
+    .item-image{
+      padding-top: 30px;
+      .item-image__content{
+        .item-image__content--icon{
+          object-fit: contain;
+        }
+      }
+    }
+  }
+  .js-file{
+    // display: none;
+  }
+  .fas fa-camera{
+    width: 30px;
+    height: 30px;
+  }
+  .item-num-0{
+    text-align: center;
+    width: 100%;
+    height: 180px;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    background: #F0F7FF;
+    border: dashed 2px rgb(214, 214, 214);
+  }
+  .item-num-1{
+    text-align: center;
+    width: 740PX;
+    height: 180px;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    background: #F0F7FF;
+    border: dashed 2px rgb(214, 214, 214);
+  }
+  .item-num-2{
+    text-align: center;
+    width: 560PX;
+    height: 180px;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    background: #F0F7FF;
+    border: dashed 2px rgb(214, 214, 214);
+  }
+  .item-num-3{
+    text-align: center;
+    width: 380PX;
+    height: 180px;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    background: #F0F7FF;
+    border: dashed 2px rgb(214, 214, 214);
+  }
+  .item-num-4{
+    text-align: center;
+    width: 200PX;
+    height: 180px;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    background: #F0F7FF;
+    border: dashed 2px rgb(214, 214, 214);
+  }
+  //下段のfile_field
+  .item-num-5{
+    text-align: center;
+    width: 100%;
+    height: 180px;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    background: #F0F7FF;
+    border: dashed 2px rgb(214, 214, 214);
+  }
+  .item-num-6{
+    text-align: center;
+    width: 740PX;
+    height: 180px;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    background: #F0F7FF;
+    border: dashed 2px rgb(214, 214, 214);
+  }
+  .item-num-7{
+    text-align: center;
+    width: 560PX;
+    height: 180px;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    background: #F0F7FF;
+    border: dashed 2px rgb(214, 214, 214);
+  }
+  .item-num-8{
+    text-align: center;
+    width: 380PX;
+    height: 180px;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    background: #F0F7FF;
+    border: dashed 2px rgb(214, 214, 214);
+  }
+  .item-num-9{
+    text-align: center;
+    width: 200PX;
+    height: 180px;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    background: #F0F7FF;
+    border: dashed 2px rgb(214, 214, 214);
+  }
+  }
+  .name_field{
+    padding: 0 16px;
+    width: 100%;
+    height: 60px;
+  }
+  .explanation_field{
+    padding: 0 16px;
+    width: 100%;
+    height: 120px;
+  }
+  .serect_field{
+    padding: 0 16px;
+    width: 100%;
+    height: 60px;
+  }
+  .exhibition_price_field{
+    height: 40px;
+    padding: 0 16px;
+    width: 40%;
+  }
+  .category{
+    background-color: red;
+    .child__category{
+      padding: 0 16px;
+      width: 100%;
+      height: 60px;
+    }
+  }
+  .send_sipping_btn{
+    margin-top: 50px;
+    text-align: center;
+    margin-bottom: 50px;
+    .sipping_btn{
+      background-color: #3CCACE;
+      color: #FFFFFF;
+      width: 360px;
+      height: 48px;
+      font-weight: 600;
+      border-radius: 10px;
+      border: 1px solid transparent;
+    }
+  }
+}

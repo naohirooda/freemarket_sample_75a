@@ -3,7 +3,7 @@ FactoryBot.define do
     id                    {1}
     name                  {"パンツ"}
     item_explanation      {"メンズパンツです"}
-    category_id           {1}
+    # user
     brand_name            {"NIKE"}
     item_status           {1}
     delivery_fee          {1}
@@ -12,8 +12,9 @@ FactoryBot.define do
     exhibition_price      {1000}
 
 
-    after(:build) do |item|                      
-      item.images << build(:image, item: item) 
-    end                                       
+    # after(:build) do |item|                      
+    #   item.images << build(:image, item: item)
+    #   item.category_id = create(:grand_child_category).id
+    # end                                       
   end
 end

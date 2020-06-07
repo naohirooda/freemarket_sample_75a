@@ -1,7 +1,10 @@
 class ItemsController < ApplicationController
-before_action :category_parent_array, only: [:new, :create]
-before_action :set_item, only: [:show, :destroy]
-before_action :show_all_instance, only: [:show, :destroy]
+before_action :category_parent_array, only: [:new, :create, :edit, :update]
+before_action :set_item, only: [:show, :edit, :update, :destroy]
+before_action :show_all_instance, only: [:show, :edit, :destroy]
+before_action :check_item_details, only: [:post_done, :update_done]
+before_action :category_map, only: [:edit, :update]
+# before_action :images_new, only: [:new, :create, :edit, :update]
 
   def index
     @items = Item.includes(:images).order('created_at DESC')
@@ -34,13 +37,29 @@ before_action :show_all_instance, only: [:show, :destroy]
     @item = Item.where(user_id: current_user.id).last
   end
 
-  def edit
-  end
-
   def show
   end
 
+  def edit
+  end
+
+
   def update
+    # 登録済画像のidの配列を生成
+    ids = @images = Image.where(item_id: params[:id]).map{|image| image.id }
+    # 登録済画像のうち、編集後もまだ残っている画像のidの配列を生成(文字列から数値に変換)
+    exit_ids = item_params[:images_attributes]
+    
+    if @item.update(item_params)
+      binding.pry
+      redirect_to  update_done_items_path
+    else
+      flash.now[:alert] = '更新できませんでした'
+      render :edit
+    end
+  end
+
+  def update_done
   end
   
   def destroy
@@ -66,6 +85,10 @@ before_action :show_all_instance, only: [:show, :destroy]
     @item = Item.find(params[:id])
   end
 
+  def check_item_details
+    @item = Item.where(user_id: current_user.id).last
+  end
+
   def show_all_instance
     @user = User.find(@item.user_id)
     @images = Image.where(item_id: params[:id])
@@ -74,5 +97,40 @@ before_action :show_all_instance, only: [:show, :destroy]
     @category_parent = Category.find(@category_id).parent.parent
     @category_child = Category.find(@category_id).parent
     @category_grandchild = Category.find(@category_id)
+  end
+
+  def category_map
+    grandchild = @item.category
+    child = grandchild.parent
+    
+    if @category_id == 46 or @category_id == 74 or @category_id == 134 or @category_id == 142 or @category_id == 147 or @category_id == 150 or @category_id == 158
+      @category_children_array = Category.children(child).each do |child|
+      end
+      @child_array = []
+      @child_array << child.name
+      @child_array << child.id
+
+      @category_grandchildren_array = Category.grandchildren(grandchild).each do |child|
+      end
+      @grandchild_array = []
+      @grandchild_array << grandchild.name
+      @grandchild_array << grandchild.id
+    else
+      @parent_array = []
+      @parent_array << @item.category.parent.parent.name
+      @parent_array << @item.category.parent.parent.id
+
+      @category_children_array = Category.children(child).each do |child|
+      end
+      @child_array = []
+      @child_array << child.name
+      @child_array << child.id
+
+      @category_grandchildren_array = Category.grandchildren(grandchild).each do |child|
+      end
+      @grandchild_array = []
+      @grandchild_array << grandchild.name
+      @grandchild_array << grandchild.id
+    end
   end
 end

@@ -1,0 +1,106 @@
+.new__page__header
+  = link_to image_tag("logo/logo.png", alt: "logo"), root_path
+= form_for @item do |f|
+  = render 'layouts/error_messages', model: f.object
+  .name__field
+    .form__label
+      .lavel__name
+        出品画像
+      .lavel__Required
+        [必須]
+  #image-box-1
+    = f.fields_for :images do |image|
+      .item-image{id:image.object.id}
+        = image_tag(image.object.image.url)
+        .item-image__operetion
+          .item-image__operetion--edit__delete 削除
+    -# %label.test-label{for: "img-file"}
+    -#   .item-num-0#image-box__container
+    -#     #append-js
+    -#       = f.fields_for :images do |image|
+    -#         .js-file_group{"data-index" => "#{image.index}"}
+    -#           = image.file_field :image, type: 'file', value:"#{image.object.id}",style: "",  id:"img-file", class:'js-file',name: "item[images_attributes][#{@item.images.count}][image]", data:{index:""}
+    -#     %i.fas.fa-camera
+  .name__field
+  .name__field
+    .form__label
+      .lavel__name
+        商品名
+      .lavel__Required
+        [必須]
+    =f.text_field :name, class: 'name_field', placeholder: "40字まで"
+    .form__label
+      .lavel__name
+        商品の説明
+      .lavel__Required
+        [必須]
+    =f.text_field :item_explanation, class: 'explanation_field', placeholder: "商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。"
+    .form__label
+      .lavel__name
+        カテゴリー
+      .lavel__Required
+        [必須]
+  - if @category_id == 46 or @category_id == 74 or @category_id == 134 or @category_id == 142 or @category_id == 147 or @category_id == 150 or @category_id == 158
+    .category
+      =f.collection_select :category_id, @category_children_array, :id, :name, selected:@child_array
+    .category__grandchild#children_wrapper
+      =f.collection_select :category_id, @category_grandchildren_array, :id, :name, selected:@grandchild_array, id:"child__category"
+  - else
+    .category
+      =f.collection_select :category_id, @category_parent_array, :id, :name, selected:@parent_array
+    .category__child#children_wrapper
+      =f.collection_select :category_id, @category_children_array, :id, :name, selected:@child_array, id:"child__category"
+    .category__grandchild#grandchildren_wrapper
+      =f.collection_select :category_id, @category_grandchildren_array, :id, :name, selected:@grandchild_array
+  .bland
+    .form__label
+      .lavel__name
+        ブランド
+    =f.text_field :brand_name, class: 'serect_field', placeholder: "例）シャネル"
+  .item_status
+    .form__label
+      .lavel__name
+        商品の状態
+      .lavel__Required
+        [必須]
+    =f.select :item_status, Item.item_statuses.keys, { include_blank: "選択してください"},class:"serect_field"
+  .delivery_fee
+    .form__label
+      .lavel__name
+        配送料の負担
+      .lavel__Required
+        [必須]
+    =f.select :delivery_fee, Item.delivery_fees.keys,{ include_blank: "選択してください"},class:"serect_field"
+  .shipping_origin
+    .form__label
+      .lavel__name
+        発送元の地域
+      .lavel__Required
+        [必須]
+    =f.select :shipping_origin, Item.shipping_origins.keys,{ include_blank: "選択してください"},class:"serect_field"
+  .days_until_shipping
+    .form__label
+      .lavel__name
+        発送元までの日数
+      .lavel__Required
+        [必須]
+    =f.select :days_until_shipping, Item.days_until_shippings.keys,{ include_blank: "選択してください"},class:"serect_field"
+  .exhibition_price
+    .form__label
+      .lavel__name
+        販売価格
+      .lavel__Required
+        [必須]
+    =f.number_field :exhibition_price, min:300,max:999999999,class:"exhibition_price_field"
+    円
+    %br
+    .sales_commission
+      .lavel__name
+        販売手数量（10%）
+      #sales_commission_price
+    .sales_profit
+      .lavel__name
+        販売利益
+      #sales_profit_proce
+  .send_sipping_btn
+    = f.submit "更新する",class:"sipping_btn"
