@@ -89,8 +89,8 @@
     .img-label{
     flex-wrap: wrap;
     .item-image{
-      .item-image__content{
-        .item-image__content--icon{
+      &__content{
+        &--icon{
           object-fit: contain;
         }
       }
