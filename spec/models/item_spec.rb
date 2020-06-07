@@ -1,10 +1,8 @@
 require 'rails_helper'
 describe Item do
   describe '#create' do
-  # RSpec.describe Item, type: :model do
-      
     it "全ての必須項目が入力されている場合出品できる" do
-      item = FactoryBot.build(:item)
+      item = build(:item)
       expect(item).to be_valid
     end
 
@@ -61,6 +59,38 @@ describe Item do
       item = build(:item, exhibition_price: "")
       item.valid?
       expect(item.errors[:exhibition_price]).to include("を入力してください")
+    end
+  end
+
+  describe '.search' do
+    it "keywordがない場合、全ての商品レコードを表示すること" do
+      item = create(:item)
+      keyword = ""
+      expect(described_class.search(keyword).length).to eq 1
+    end
+
+    it "商品名に一致するレコードを検索できること" do
+      item = create(:item, name: "ロボクリン")
+      keyword = "ロボ"
+      expect(described_class.search(keyword).length).to eq 1
+    end
+
+    it "商品名に一致しないレコードは検索できないこと" do
+      item = create(:item, name: "ロボクリン")
+      keyword = "robo"
+      expect(described_class.search(keyword).length).to eq 0
+    end
+
+    it "商品説明に一致するレコードを検索できること" do
+      item = create(:item, item_explanation: "ロボです")
+      keyword = "ロボ"
+      expect(described_class.search(keyword).length).to eq 1
+    end
+
+    it "商品説明に一致しないレコードは検索できないこと" do
+      item = create(:item, item_explanation: "ロボです")
+      keyword = "robo"
+      expect(described_class.search(keyword).length).to eq 0
     end
   end
 end

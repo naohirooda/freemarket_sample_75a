@@ -1,6 +1,6 @@
 .item__body {
   width: 100%;
-  height: 100vh;
+  height: 100%;
 
   &__title {
     padding-top: 30px;
@@ -118,5 +118,23 @@
         }
       }
     }
+  }
+}
+.item {
+  display: flex;
+  justify-content: center;
+  max-width: 1040px;
+  margin: 0 auto;
+
+  #short {
+    width: 100%;
+    height: 100%;
+  }
+  .item_search {
+    width: 300px;
+    min-height: 100vh;
+    padding: 5px;
+    background-color: #333;
+    color: #ffffff;
   }
 }
