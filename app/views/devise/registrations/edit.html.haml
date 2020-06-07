@@ -1,0 +1,68 @@
+.account__page
+  .account__page__header
+    = link_to image_tag("logo/logo.png", alt: "logo"), root_path
+  .account__page__main
+    = form_for current_user, url: user_registration_path do |f|
+      .account__page__main__content
+        .account__page__main__content--error
+          = devise_error_messages!
+        .field__title
+          会員情報の編集
+        .field__label
+          .name
+            = f.label :nickname
+          .required
+            必須
+        .field__input
+          = f.text_field :nickname, autofocus: true, placeholder: "例）フリマ太郎", class: "textbox"
+        .field__label
+          .name
+            = f.label :email
+          .required
+            必須
+        .field__input
+          = f.email_field :email, placeholder: "携帯・ＰＣどちらでも可", class: "textbox"
+        .field__label
+          .name
+            = f.label :password
+          .required
+            必須
+        .field__input
+          = f.password_field :password, autocomplete: "off", placeholder: "7文字以上の半角英数字", class: "textbox", id: "js-password"
+        .field__guide
+          ＊ 半角英数字７文字以上で設定して下さい
+        .field__label
+          .name
+            = f.label :password_confirmation
+          .required
+            必須
+        .field__input
+          = f.password_field :password_confirmation, autocomplete: "off", placeholder: "もう一度入力して下さい", class: "textbox", id: "js-password_confirmation"
+        %p
+          = check_box_tag :passcheck
+          = f.label "パスワードを表示する", class: "field__guide"
+        .field__subtitle
+          本人確認
+        .field__guide
+          安心・安全にご利用いただくために、お客様の本人情報の登録にご協力ください。他のお客さまに公開されることはありません。
+        .field__label
+          .name
+            = f.label "お名前（全角）"
+          .required
+            必須
+        .field__input
+          = f.text_field :last_name, placeholder: "例）山田", class: "shortbox"
+          = f.text_field :first_name, placeholder: "例）彩", class: "shortbox"
+        .field__label
+          .name
+            = f.label "お名前（カナ）"
+          .required
+            必須
+        .field__input
+          = f.text_field :last_name_kana, placeholder: "例）ヤマダ", class: "shortbox"
+          = f.text_field :first_name_kana, placeholder: "例）アヤ", class: "shortbox"
+        .field__guide
+          %br
+          ※ 本人情報は正しく入力してください。会員登録後、修正するにはお時間を頂く場合があります。
+        .actions
+          = f.submit "登録する", class: "submit-btn"

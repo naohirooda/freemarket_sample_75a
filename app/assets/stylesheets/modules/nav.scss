@@ -1,0 +1,33 @@
+.breadcrumbs{
+  width: 100%;
+  border-top:1px solid #eee;
+  box-shadow: 0 3px 3px 0 rgba(0,0,0,0.16);
+  position: relative;
+  padding: 0 60px;
+
+  a {
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+    &:hover {
+      color: #3ccace;
+    }
+  }
+
+  &__list {
+    padding: 17px 0 16px;
+    width: 100%;
+    max-width: 1040px;
+    font-size: 14px;
+    margin: 0 auto;
+    color: #333;
+
+    .fa {
+      padding: 0px 10px;
+    }
+
+    span {
+      font-weight: bold;
+    }
+  }
+}

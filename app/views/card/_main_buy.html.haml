@@ -1,0 +1,75 @@
+-if @item.auction_status == "売り切れ"
+  .buy#short
+    .buy__main
+      .buy__main__title#soldout
+        この商品は売切れました。
+      .buy__main__item
+        .buy__main__item--photo
+          = image_tag @item.images.first.image_url
+        .buy__main__item--data
+          .name
+            = @item.name
+          .price
+            = @item.exhibition_price.to_s(:delimited)
+            円 (税込)
+            = @item.delivery_fee
+- else
+  .buy
+    .buy__main
+      .buy__main__title
+        購入内容確認
+      .buy__main__item
+        .buy__main__item--photo
+          = image_tag @item.images.first.image_url
+        .buy__main__item--data
+          .name
+            = @item.name
+          .price
+            = @item.exhibition_price.to_s(:delimited)
+            円 (税込)
+            = @item.delivery_fee
+      .buy__main__claim
+        .title
+          お支払金額
+        .price
+          = @item.exhibition_price.to_s(:delimited)
+          円
+      .buy__main__card__title
+        お支払方法
+      - if @card_info.blank?
+        .buy__main__newlink
+          .icon 
+            = icon("far", "plus-square")
+          .text
+            =link_to "クレジットカードを登録する", new_card_path, data: {"turbolinks" => false}, class:"text"
+        .buy__main__buynow
+          = form_tag(action: :pay, method: :post) do
+            %script.payjp-button{src: "https://checkout.pay.jp", type: "text/javascript" ,"data-text": "クレジット情報を登録しないで購入する" ,"data-key": "pk_test_2cf741aa229ef28c8cb488a9","data-lang": "ja"}
+        .buy__main__buynow--text
+          ※商品の購入はクレジットカード決済のみとなっております。「クレジットカードを登録する」を選ぶと２回目以降の購入がスムーズとなります。１回限りの購入のお客様は「クレジット情報を登録しないで購入する」をクリックし、必要な支払い情報を入力して「カードで支払う」をクリックして下さい。
+      - else
+        .buy__main__card
+          = "**** **** **** " + @card_info.last4
+        .buy__main__card
+          = @card_info.exp_month.to_s + "月 / " + @card_info.exp_year.to_s.slice(2,3) + "年"
+        .buy__main__card
+          = image_tag "credit_logo/#{@card_src}", alt: @card_info.brand
+      .buy__main__address
+        配送先
+      .buy__main__address
+        〒
+        = current_user.address.post_code
+      .buy__main__address
+        = current_user.address.preficture
+        = current_user.address.city
+        = current_user.address.address
+        = current_user.address.building_name
+      .buy__main__address
+        = current_user.last_name
+        = current_user.first_name
+      - if @card_info.present?
+        .buy__main__btn
+          = link_to '購入する', pay_card_path(@item.id), method: :post, class: 'link'
+= render "top/lower-photo"
+= render "top/footer"
+= render "top/btn"

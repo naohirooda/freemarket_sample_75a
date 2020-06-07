@@ -1,0 +1,13 @@
+= render "top/header"
+.done#fullsize
+  .done__title
+    商品を出品しました
+  .done__backlink
+    = link_to 'トップページへ戻る', root_path, class: 'link'
+  .done__backlink
+    = link_to '出品した商品を確認する', item_path(@item), class: 'link'
+  .done__backlink
+    = link_to '出品中の商品一覧を見る', users_path, class: 'link'
+= render "top/lower-photo"
+= render "top/footer"
+= render "top/btn"

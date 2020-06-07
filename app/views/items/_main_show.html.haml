@@ -1,0 +1,151 @@
+.mainShow
+  .mainShow__box
+    .mainShow__box__content
+      .mainShow__box__content__top
+        .mainShow__box__content__top__itemBox
+          %h2= @item.name
+          .mainShow__box__content__top__itemBox__images
+            %ul.image__main
+              %li.image__main__list
+                = image_tag(@images_first.image.url, class: "main__photo")
+                .image__box
+                  %ul.image__sub
+                    - @images.each do |img|
+                      %li.image__sub__list
+                        = image_tag(img.image.url, class: "sub__photo", size: "75x75")
+          .mainShow__box__content__top__itemBox__price
+            %span.price
+              = @item.exhibition_price.to_s(:delimited)
+              円
+            .mainShow__box__content__top__itemBox__price__detail
+              %span
+                (税込)
+              %span
+                送料込み 
+          .mainShow__box__content__top__itemBox__explanation
+            = @item.item_explanation
+          .mainShow__box__content__top__itemBox__table
+            %table 
+              %tr 
+                %th 出品者
+                %td= @user.nickname
+              %tr 
+                %th カテゴリー
+                - if [46, 74, 134, 142, 147, 150, 158].include?(@category_id)
+                  %td
+                    = link_to "#{@category_child.name}","#"
+                    %br= link_to "#{@category_grandchild.name}","#" 
+                -else
+                  %td
+                    = link_to "#{@category_parent.name}","#"
+                    %br= link_to "#{@category_child.name}","#"
+                    = link_to "#{@category_grandchild.name}","#"
+              %tr
+                %th ブランド
+                %td= @item.brand_name
+              %tr
+                %th 商品のサイズ
+                %td
+              %tr
+                %th 商品の状態
+                %td= @item.item_status
+              %tr
+                %th 配送料の負担
+                %td= @item.delivery_fee
+              %tr
+                %th 発送元の地域
+                %td= link_to "#{@item.shipping_origin}","#"
+              %tr
+                %th 発送日の目安
+                %td= @item.days_until_shipping
+          .mainShow__box__content__top__itemBox__option
+            %ul.like
+              %li.like__list
+                = icon('fa', 'star')
+                お気に入り 0
+            %ul.report
+              %li.report__list
+                = link_to "#" do
+                  = icon('fa', 'flag')
+                  不適切な商品の通報
+        .mainShow__box__content__top__editDeleteBuy
+          - if current_user == @user
+            = link_to "商品の編集", "#", class: "edit"
+            = link_to "商品の削除", item_path(@item.id), method: :delete, class: "destory"
+          - elsif user_signed_in?
+            = link_to "購入画面に進む", buy_card_path(@item.id), data: {"turbolinks" => false} , class: "pay"
+          - else
+        .mainShow__box__content__top__commentBox
+          .title
+            コメント一覧
+          .mainShow__box__content__top__commentBox__comments#comments
+            - if @comments
+              - @comments.each do |comment|
+                -if comment.user_id == @item.user_id
+                  .mainShow__box__content__top__commentBox__comments__comment
+                    .profile
+                      .profile__name
+                        = comment.user.nickname
+                      .profile__right
+                        .image
+                          = icon('fas', 'user-circle')
+                        .seller_or_buyer
+                          出品者
+                    .comment
+                      .comment__text
+                        = comment.comment
+                      .comment__bottom
+                        .comment__date
+                          = icon('far', 'clock')
+                          = comment.days_passed
+                        .comment__trash
+                          = link_to item_comment_path(comment.item.id, comment.id), "item_id": :@item, method: :delete do
+                            = icon('fa', 'trash')
+                - else
+                  .mainShow__box__content__top__commentBox__comments__comment--other
+                    .profile
+                      .profile__right
+                        .image
+                          = icon('far', 'user-circle')
+                        .seller_or_buyer
+                          お客様
+                      .profile__name
+                        = comment.user.nickname
+                    .comment
+                      .comment__text
+                        = comment.comment
+                      .comment__bottom
+                        .date
+                          = icon('far', 'clock')
+                          = comment.days_passed
+                        .comment__icon
+                          .flag
+                            = icon('far', 'flag')
+                          .trash
+                            = link_to item_comment_path(comment.item.id, comment.id), "item_id": :@item, method: :delete do
+                              = icon('fa', 'trash')
+          -if user_signed_in?
+            = form_with model: [@item, @comment], local: true, class: "new_comment", id: "comment_form" do |f|
+              = f.text_area :comment, required: "required", class: "text_area"
+              %p.note
+                相手のことを考え丁寧なコメントを心がけましょう。
+                %br 不快な言葉遣いなどは利用制限や退会処分となることがあります。
+              = f.submit "コメントする", class: "comment_btn"
+          - else
+            %p.note
+              商品の購入、コメントの投稿には新規会員登録/ログインが必要です
+        %ul.links
+          %li.links__before
+            = link_to "#", class: "angle__left" do
+              = icon('fa', 'angle-left')
+              %span 前の商品
+          %li.links__after
+            = link_to "#", class: "angle__right" do
+              %span 後ろの商品
+              = icon('fa', 'angle-right')
+      .mainShow__box__content__related
+        - if [46, 74, 134, 142, 147, 150, 158].include?(@category_id)
+          = link_to "#{@category_child.name}をもっと見る", "#", class: "related"
+        - else
+          = link_to "#{@category_parent.name}をもっと見る", "#", class: "related"
+

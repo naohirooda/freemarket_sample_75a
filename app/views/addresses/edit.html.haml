@@ -1,0 +1,50 @@
+.account__page
+  .account__page__header
+    = link_to image_tag("logo/logo.png", alt: "logo"), root_path
+  .account__page__main
+    = form_for @address do |f|
+      .account__page__main__content
+        .account__page__main__content--error
+          = render 'layouts/error_messages', model: f.object
+        .field__title
+          お届け先情報の編集
+        .field__label
+          .name
+            = f.label :post_code
+          .required
+            必須
+        .field__input
+          = f.text_field :post_code, autofocus: true, placeholder: "例）1234567", class: "textbox"
+        .field__label
+          .name
+            = f.label :preficture
+          .required
+            必須
+        .field__input
+          = f.select :preficture, Address.prefictures.keys, include_blank: "選択して下さい"
+        .field__label
+          .name
+            = f.label :city
+          .required
+            必須
+        .field__input
+          = f.text_field :city, placeholder: "例）福岡市中央区〇〇", class: "textbox"
+        .field__label
+          .name
+            = f.label :address
+          .required
+            必須
+        .field__input
+          = f.text_field :address, placeholder: "例）1-1-1", class: "textbox"
+        .field__label
+          .name
+            = f.label :building_name
+        .field__input
+          = f.text_field :building_name, placeholder: "例）TECHマンション203", class: "textbox"
+        .field__label
+          .name
+            = f.label :phone_number
+        .field__input
+          = f.text_field :phone_number, placeholder: "例）08012341234", class: "textbox"
+        .actions
+          = f.submit "登録", class: "submit-btn"

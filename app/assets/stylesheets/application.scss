@@ -1,8 +1,9 @@
-@import "reset";
+@import 'reset';
 @import 'mixin/underline';
 @import 'mixin/opacity';
 @import 'mixin/flex_align-c';
 @import 'mixin/new_item';
+@import 'mixin/blue_link';
 @import 'modules/header';
 @import 'modules/main';
 @import 'modules/lower-photo';
@@ -11,6 +12,14 @@
 @import 'modules/new_item';
 @import 'items_main_pay';
 @import "user_login_registration";
+@import 'card_main_buy';
+@import 'registration_&_edit';
 @import 'item_index';
+@import 'done';
+@import 'user_show';
+@import 'card';
+@import 'modules/item_main_show';
+@import 'modules/nav';
+@import 'modules/flash';
 @import 'font-awesome-sprockets';
 @import 'font-awesome';

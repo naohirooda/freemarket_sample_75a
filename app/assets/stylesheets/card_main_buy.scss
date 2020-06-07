@@ -1,0 +1,92 @@
+.buy {
+  background-color: #f8f8f8;
+  width: 100%;
+  padding: 30px;
+
+  &__main{
+    background-color: #ffffff;
+    width: 700px;
+    padding: 50px;
+    margin: 0 auto;
+
+    &__title {
+      font-size: 22px;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 60px;
+      color: #3ccace;
+    }
+    #soldout {
+      color: red;
+    }
+    &__item {
+      display: flex;
+      justify-content: center;
+
+      &--data {
+        margin-left: 30px;
+
+        .name {
+          font-size: 20px;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+      }
+    }
+    &__claim {
+      display: flex;
+      justify-content: space-between;
+      font-size: 24px;
+      font-weight: bold;
+      margin: 60px auto;
+    }
+
+    &__newlink {
+      display: flex;
+      margin-bottom: 60px;
+
+      .icon {
+        text-decoration: none;
+        color: #3CCACE;
+        padding-top: 3px;
+        margin-right: 2px;
+      }
+      .text {
+        text-decoration: none;
+        color: #3CCACE;
+      }
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+    &__card {
+      img {
+        height: 40px;
+        margin-bottom: 60px;
+      } 
+    }
+    &__buynow {
+      &--text {
+        margin: 12px auto 60px;
+        font-size: 12px;
+      }
+    }
+    &__btn {
+      margin-top: 60px;
+      text-align: center;
+      a {
+        background-color:#888;
+        width: 100%;
+        line-height: 48px;
+        font-size: 14px;
+        text-decoration: none;
+        color: #fff;
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}
+#short {
+  height: 50vh;
+}
