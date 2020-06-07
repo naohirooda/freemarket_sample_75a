@@ -6,7 +6,7 @@ $(function(){
   function appendChildrenBox(insertHTML){
     var childSelectHtml = "";
     childSelectHtml = `<div class="category__child" id="children_wrapper">
-                        <select id="child__category" name="item[category_id]">
+                        <select id="child__category" name="item[category_id]" class="child__category">
                           <option value="">---</option>
                           ${insertHTML}
                         </select>
@@ -16,7 +16,7 @@ $(function(){
   function appendGrandchildrenBox(insertHTML){
     var grandchildSelectHtml = "";
     grandchildSelectHtml = `<div class="category__child" id="grandchildren_wrapper">
-                              <select id="grandchild__category" name="item[category_id]">
+                              <select id="grandchild__category" name="item[category_id]" class="child__category">
                                 <option value="">---</option>
                                 ${insertHTML}
                                 </select>

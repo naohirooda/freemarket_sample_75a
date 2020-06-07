@@ -1,0 +1,14 @@
+@mixin image_place() {
+  content: '';
+  text-align: center;
+  height: 180px;
+  padding: 0.5em 1em;
+  background: #f0f7ff;
+  border: dashed 2px rgb(214, 214, 214);
+}
+@mixin input_place() {
+  content: '';
+  padding: 0 16px;
+  width: 940px;
+  height: 60px;
+}
