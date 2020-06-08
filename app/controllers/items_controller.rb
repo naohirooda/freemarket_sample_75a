@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 before_action :category_parent_array, only: [:new, :create, :edit, :update]
 before_action :set_item, only: [:show, :edit, :update, :destroy]
-before_action :show_all_instance, only: [:show, :edit, :destroy]
+before_action :show_all_instance, only: [:show, :edit, :update, :destroy]
 before_action :check_item_details, only: [:post_done, :update_done]
 before_action :category_map, only: [:edit, :update]
 # before_action :images_new, only: [:new, :create, :edit, :update]
@@ -48,10 +48,19 @@ before_action :category_map, only: [:edit, :update]
     # 登録済画像のidの配列を生成
     ids = @images = Image.where(item_id: params[:id]).map{|image| image.id }
     # 登録済画像のうち、編集後もまだ残っている画像のidの配列を生成(文字列から数値に変換)
-    exit_ids = item_params[:images_attributes]
-    
+    exit_ids = []
+    item_params[:images_attributes].each do |a,b|
+      exit_ids << item_params[:images_attributes].dig(:"#{a}",:id).to_i
+    end
+    exit_ids_uniq = exit_ids.uniq
+    # 登録済画像が残っていない場合(配列に０が格納されている)、配列を空にする
+    # exist_ids_uniq.clear if exist_ids[0] == 0
+
+    # DB内の画像で編集後に残っていないidの画像を削除
+    delete__db = ids - exit_ids_uniq
+    binding.pry
+    Image.where(id:delete__db).destroy_all
     if @item.update(item_params)
-      binding.pry
       redirect_to  update_done_items_path
     else
       flash.now[:alert] = '更新できませんでした'
@@ -102,7 +111,6 @@ before_action :category_map, only: [:edit, :update]
   def category_map
     grandchild = @item.category
     child = grandchild.parent
-    
     if @category_id == 46 or @category_id == 74 or @category_id == 134 or @category_id == 142 or @category_id == 147 or @category_id == 150 or @category_id == 158
       @category_children_array = Category.children(child).each do |child|
       end

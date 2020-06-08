@@ -11,6 +11,11 @@ $(function(){
       dataBox.items.add(file)
       var num = $('.item-image').length + 1 + i
       var aaa = $('.item-image').length + i
+      var image_value = $('.img-label').prev().attr('id')
+      var id = Number(image_value)
+      var input_value = $('#append-js').children('div').last().children('input').attr('value')
+      var value = Number(input_value)
+      console.log(value)
       fileReader.readAsDataURL(file);
      //画像が10枚になったら超えたらドロップボックスを削除する
       if (num == 10){
@@ -19,7 +24,7 @@ $(function(){
       //読み込みが完了すると、srcにfileのURLを格納
       fileReader.onloadend = function() {
         var src = fileReader.result
-        var html= `<div class='item-image' data-image="${file.name}" data-index="${aaa}">
+        var html= `<div class='item-image' data-image="${file.name}" data-index="${aaa}" id="${id+1}">
                     <div class=' item-image__content'>
                       <div class='item-image__content--icon'>
                         <img src=${src} width="188" height="180" >
@@ -33,7 +38,7 @@ $(function(){
           const html = `<div  class="js-file_group" data-index="${num}">
                           <input class="js-file" type="file"
                           name="item[images_attributes][${num}][image]"
-                          id="img-file" data-index="${num}">
+                          id="img-file" data-index="${num}" value="${value+1}">
                         </div>`;
           return html;
         }
