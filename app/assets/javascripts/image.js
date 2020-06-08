@@ -31,7 +31,7 @@ $(function(){
                       </div>
                     </div>
                     <div class='item-image__operetion'>
-                      <div class='item-image__operetion--delete'>削除</div>
+                      <div class='item-image__operetion--edit__delete'>削除</div>
                     </div>
                   </div>`
         const buildFileField = (num)=> {
@@ -53,20 +53,20 @@ $(function(){
       // $('#img-file').attr('name', `item[images_attributes][${num}][image]`)
     });
   });
-  $(document).on("click", '.item-image__operetion--delete', function(){
-    //削除を押されたプレビュー要素を取得
-    var target_image = $(this).parent().parent();
-    //削除を押されたプレビューimageのfile名を取得
-    var target_index = $(target_image).data('index');
-    var target_file = $('[data-index="'+target_index+'"].js-file');
-    //プレビューを削除
-    target_image.remove()
-    target_file.remove()
-    //image-box__containerクラスをもつdivタグのクラスを削除のたびに変更
-    var num = $('.item-image').length
-    $('#image-box__container').show()
-    $('#image-box__container').attr('class', `item-num-${num}`)
-  })
+  // $(document).on("click", '.item-image__operetion--delete', function(){
+  //   //削除を押されたプレビュー要素を取得
+  //   var target_image = $(this).parent().parent();
+  //   //削除を押されたプレビューimageのfile名を取得
+  //   var target_index = $(target_image).data('index');
+  //   var target_file = $('[data-index="'+target_index+'"].js-file');
+  //   //プレビューを削除
+  //   // target_image.remove()
+  //   // target_file.remove()
+  //   //image-box__containerクラスをもつdivタグのクラスを削除のたびに変更
+  //   var num = $('.item-image').length
+  //   $('#image-box__container').show()
+  //   $('#image-box__container').attr('class', `item-num-${num}`)
+  // })
   $(document).on("click", '.item-image__operetion--edit__delete', function(){
     //削除を押されたプレビュー要素を取得
     var target_image = $(this).parent().parent();

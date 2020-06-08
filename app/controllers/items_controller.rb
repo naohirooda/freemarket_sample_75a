@@ -58,7 +58,7 @@ before_action :category_map, only: [:edit, :update]
 
     # DB内の画像で編集後に残っていないidの画像を削除
     delete__db = ids - exit_ids_uniq
-    binding.pry
+    # binding.pry
     Image.where(id:delete__db).destroy_all
     if @item.update(item_params)
       redirect_to  update_done_items_path
