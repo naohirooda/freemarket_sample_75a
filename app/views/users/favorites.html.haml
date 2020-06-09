@@ -1,47 +1,47 @@
 = render "top/header"
-- breadcrumb :user_commented_items
+- breadcrumb :user_favorite
 = render "items/nav"
 .item__body
   .item__body__title
-    コメントがついた商品一覧
+    お気に入り商品一覧
   .item__body__lists
-    - @commented_items.each do |item|
-      -if item.auction_status == '売り切れ'
+    - @favorites.each do |favorite|
+      -if favorite.item.auction_status == '売り切れ'
         .user__body__lists__list
-          = link_to item_path(item.id) do
+          = link_to item_path(favorite.item.id) do
             %figure.list__img
-              = image_tag item.images.first.image.url
+              = image_tag favorite.item.images.first.image.url
             .list__body
               %h3.name
-                = item.name
+                = favorite.item.name
               .list__price
                 %ul
                   %li
-                    = item.exhibition_price.to_s(:delimited)
+                    = favorite.item.exhibition_price.to_s(:delimited)
                     円
                   %li
                     = icon('fa', 'star')
-                    = item.favorites.count
+                    = favorite.item.favorites.count
                 %p (税込)
             .list__sold
               .list__sold__inner
                 sold
       - else
         .user__body__lists__list
-          = link_to item_path(item.id) do
+          = link_to item_path(favorite.item.id) do
             %figure.list__img
-              = image_tag item.images.first.image.url
+              = image_tag favorite.item.images.first.image.url
             .list__body
               %h3.name
-                = item.name
+                = favorite.item.name
               .list__price
                 %ul
                   %li
-                    = item.exhibition_price.to_s(:delimited)
+                    = favorite.item.exhibition_price.to_s(:delimited)
                     円
                   %li
                     = icon('fa', 'star')
-                    = item.favorites.count
+                    = favorite.item.favorites.count
                 %p (税込)
 = render "top/lower-photo"
 = render "top/footer"

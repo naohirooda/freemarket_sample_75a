@@ -7,6 +7,11 @@ crumb :user_show do
   parent :root
 end
 
+crumb :user_favorite do
+  link "お気に入り商品一覧", favorites_users_path
+  parent :user_show
+end
+
 crumb :user_index do
   link "出品商品一覧", users_path
   parent :user_show
