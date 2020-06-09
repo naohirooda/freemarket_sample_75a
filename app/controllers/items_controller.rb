@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 before_action :category_parent_array, only: [:new, :create]
-before_action :set_item, only: [:show, :destroy]
-before_action :show_all_instance, only: [:show, :destroy]
+before_action :set_item,              only: [:show, :destroy]
+before_action :show_all_instance,     only: [:show, :destroy]
 
   def index
     @items = Item.includes(:images).order('created_at DESC')
@@ -38,6 +38,8 @@ before_action :show_all_instance, only: [:show, :destroy]
   end
 
   def show
+    @favorites = Favorite.where(item_id: params[:id])
+    @user_favorite = @favorites.where(user_id: current_user)
     @comment = Comment.new
     @comments = @item.comments.includes(:user)
   end

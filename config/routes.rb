@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'favorites/create'
+  get 'favorites/destroy'
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
@@ -26,6 +28,7 @@ Rails.application.routes.draw do
       get 'commented_items'
       get 'sold_items'
       get 'edit_done'
+      get 'favorites'
     end
   end
 
@@ -36,7 +39,8 @@ Rails.application.routes.draw do
   end
 
   resources :items do
-    resources :comments, only: [:create, :destroy]
+    resources :comments,  only: [:create, :destroy]
+    resources :favorites, only: [:create, :destroy]
     collection do
       get 'get_category_children', defaults: { fomat: 'json'}
       get 'get_category_grandchildren', defaults: { fomat: 'json'}

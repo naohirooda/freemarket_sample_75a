@@ -59,10 +59,8 @@
                 %th 発送日の目安
                 %td= @item.days_until_shipping
           .mainShow__box__content__top__itemBox__option
-            %ul.like
-              %li.like__list
-                = icon('fa', 'star')
-                お気に入り 0
+            %ul#like
+              = render partial:'favorites/favorite', locals: { item: @item, favorites: @favorites, user_favorite: @user_favorite }
             %ul.report
               %li.report__list
                 = link_to "#" do

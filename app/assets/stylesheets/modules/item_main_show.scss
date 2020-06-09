@@ -111,14 +111,30 @@
           &__option{
             display: flex;
             justify-content: space-between;
+
             .like{
               margin-top: 10px;
               &__list{
                 margin-right: auto;
                 padding: 6px 10px;
                 border-radius: 40px;
-                color: #3ccace;
                 border: 1px solid #ffb340;
+                cursor: pointer;
+                a {
+                  text-decoration: none;
+                  color: #3ccace;
+                }
+              }
+              &__list--on{
+                margin-right: auto;
+                padding: 6px 10px;
+                border-radius: 40px;
+                background-color: #ffb340;
+                cursor: pointer;
+                a {
+                  text-decoration: none;
+                  color: #ffffff;
+                }
               }
             }
             .report{

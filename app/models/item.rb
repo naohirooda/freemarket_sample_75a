@@ -3,6 +3,8 @@ class Item < ApplicationRecord
   has_many :images,    dependent: :destroy
   belongs_to :category
   has_many :comments,  dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :users,     through: :favorites
 
   accepts_nested_attributes_for :images, allow_destroy: true
   validates :name,                         presence: true,    length: { maximum: 40 } 
