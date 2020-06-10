@@ -4,7 +4,6 @@ before_action :set_item, only: [:show, :edit, :update, :destroy]
 before_action :show_all_instance, only: [:show, :edit, :update, :destroy]
 before_action :check_item_details, only: [:post_done, :update_done]
 before_action :category_map, only: [:edit, :update]
-# before_action :images_new, only: [:new, :create, :edit, :update]
 
   def index
     @items = Item.includes(:images).order('created_at DESC')
@@ -45,30 +44,30 @@ before_action :category_map, only: [:edit, :update]
 
 
   def update
-    # 登録済画像のidの配列を生成
-    ids = @images = Image.where(item_id: params[:id]).map{|image| image.id }
-    # 登録済画像のうち、編集後もまだ残っている画像のidの配列を生成(文字列から数値に変換)
-    exit_ids = []
-    item_params[:images_attributes].each do |a,b|
-      exit_ids << item_params[:images_attributes].dig(:"#{a}",:id).to_i
-    end
-    exit_ids_uniq = exit_ids.uniq
-    # 登録済画像が残っていない場合(配列に０が格納されている)、配列を空にする
-    # exist_ids_uniq.clear if exist_ids[0] == 0
-
-    # DB内の画像で編集後に残っていないidの画像を削除
-    delete__db = ids - exit_ids_uniq
-    # binding.pry
-    Image.where(id:delete__db).destroy_all
-    if @item.update(item_params)
-      redirect_to  update_done_items_path
-    else
-      flash.now[:alert] = '更新できませんでした'
+    if item_params[:images_attributes].nil?
+      flash.now[:alert] = '更新できませんでした 【画像を１枚以上入れてください】'
       render :edit
+    else
+      exit_ids = []
+      item_params[:images_attributes].each do |a,b|
+        exit_ids << item_params[:images_attributes].dig(:"#{a}",:id).to_i
+      end
+      ids = Image.where(item_id: params[:id]).map{|image| image.id }
+      exit_ids_uniq = exit_ids.uniq
+      delete__db = ids - exit_ids_uniq
+      Image.where(id:delete__db).destroy_all
+      @item.touch
+      if @item.update(item_params)
+        redirect_to  update_done_items_path
+      else
+        flash.now[:alert] = '更新できませんでした'
+        render :edit
+      end
     end
   end
 
   def update_done
+    @item_update = Item.order("updated_at DESC").first
   end
   
   def destroy
@@ -112,13 +111,13 @@ before_action :category_map, only: [:edit, :update]
     grandchild = @item.category
     child = grandchild.parent
     if @category_id == 46 or @category_id == 74 or @category_id == 134 or @category_id == 142 or @category_id == 147 or @category_id == 150 or @category_id == 158
-      @category_children_array = Category.children(child).each do |child|
+      @category_children_array = Category.where(ancestry: child.ancestry).each do |child|
       end
       @child_array = []
       @child_array << child.name
       @child_array << child.id
 
-      @category_grandchildren_array = Category.grandchildren(grandchild).each do |child|
+      @category_grandchildren_array = Category.where(ancestry: grandchild.ancestry) .each do |child|
       end
       @grandchild_array = []
       @grandchild_array << grandchild.name
@@ -128,13 +127,13 @@ before_action :category_map, only: [:edit, :update]
       @parent_array << @item.category.parent.parent.name
       @parent_array << @item.category.parent.parent.id
 
-      @category_children_array = Category.children(child).each do |child|
+      @category_children_array = Category.where(ancestry: child.ancestry).each do |child|
       end
       @child_array = []
       @child_array << child.name
       @child_array << child.id
 
-      @category_grandchildren_array = Category.grandchildren(grandchild).each do |child|
+      @category_grandchildren_array = Category.where(ancestry: grandchild.ancestry) .each do |child|
       end
       @grandchild_array = []
       @grandchild_array << grandchild.name

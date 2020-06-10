@@ -1,9 +1,7 @@
-
 $(function(){
   var dataBox = new DataTransfer();
   var file_field = document.getElementById('img-file')
-  $('#append-js').on('change','#img-file',function(){
-    // var files = $('input[type="file"]').prop('files')[0];
+  $('#append-js-edit').on('change','#img-file',function(){
     $.each(this.files, function(i, file){
       //FileReaderのreadAsDataURLで指定したFileオブジェクトを読み込む
       var fileReader = new FileReader();
@@ -11,11 +9,10 @@ $(function(){
       dataBox.items.add(file)
       var num = $('.item-image').length + 1 + i
       var aaa = $('.item-image').length + i
-      var image_value = $('.img-label').prev().attr('id')
-      var id = Number(image_value)
-      var input_value = $('#append-js').children('div').last().children('input').attr('value')
-      var value = Number(input_value)
-      console.log(value)
+      var image_id = Number($('#image-box-1').attr('class'))
+      var append_div_count = Number($('div[id=1]').length) 
+      var noreset_id = image_id + append_div_count
+
       fileReader.readAsDataURL(file);
      //画像が10枚になったら超えたらドロップボックスを削除する
       if (num == 10){
@@ -24,55 +21,79 @@ $(function(){
       //読み込みが完了すると、srcにfileのURLを格納
       fileReader.onloadend = function() {
         var src = fileReader.result
-        var html= `<div class='item-image' data-image="${file.name}" data-index="${aaa}" id="${id+1}">
+        var html1= `<div class='item-image' data-image="${file.name}" data-index="${aaa}" id="${noreset_id}">
                     <div class=' item-image__content'>
                       <div class='item-image__content--icon'>
                         <img src=${src} width="188" height="180" >
                       </div>
                     </div>
                     <div class='item-image__operetion'>
-                      <div class='item-image__operetion--edit__delete'>削除</div>
+                      <div class='item-image__operetion--edit__delete__one'>削除</div>
                     </div>
                   </div>`
-        const buildFileField = (num)=> {
-          const html = `<div  class="js-file_group" data-index="${num}">
+        var html2= `<div class='item-image' data-image="${file.name}" data-index="${aaa}" id="${noreset_id}">
+                    <div class=' item-image__content'>
+                      <div class='item-image__content--icon'>
+                        <img src=${src} width="188" height="180" >
+                      </div>
+                    </div>
+                    <div class='item-image__operetion'>
+                      <div class='item-image__operetion--edit__delete__file'>削除</div>
+                    </div>
+                  </div>`
+        const buildFileField1 = (num)=> {
+          const html = `<div  class="js-file_group" data-index="${num}" id=1>
                           <input class="js-file" type="file"
                           name="item[images_attributes][${num}][image]"
-                          id="img-file" data-index="${num}" value="${value+1}">
+                          id="img-file" data-index="${num}" value="${noreset_id}" >
                         </div>`;
           return html;
         }
         $('.js-file').removeAttr('id');
         //image_box__container要素の前にhtmlを差し込む
-        $('.img-label').before(html);
+        append = $('#append-js-edit').children('div').last().attr('id')
+        append_num = Number(append)
+
+        if(isNaN(append_num) == true){ 
+          $('.img-label').before(html1);
+        }else{
+          $('.img-label').before(html2);
+        }
         // $('#image-box__container').before(buildFileField(num))
-        $('#append-js').append(buildFileField(num));
+        $('#append-js-edit').append(buildFileField1(num));
       };
       //image-box__containerのクラスを変更し、CSSでドロップボックスの大きさを変えてやる。
       $('#image-box__container').attr('class', `item-num-${num}`)
       // $('#img-file').attr('name', `item[images_attributes][${num}][image]`)
     });
   });
-  // $(document).on("click", '.item-image__operetion--delete', function(){
-  //   //削除を押されたプレビュー要素を取得
-  //   var target_image = $(this).parent().parent();
-  //   //削除を押されたプレビューimageのfile名を取得
-  //   var target_index = $(target_image).data('index');
-  //   var target_file = $('[data-index="'+target_index+'"].js-file');
-  //   //プレビューを削除
-  //   // target_image.remove()
-  //   // target_file.remove()
-  //   //image-box__containerクラスをもつdivタグのクラスを削除のたびに変更
-  //   var num = $('.item-image').length
-  //   $('#image-box__container').show()
-  //   $('#image-box__container').attr('class', `item-num-${num}`)
-  // })
-  $(document).on("click", '.item-image__operetion--edit__delete', function(){
+  // 10枚登録されていた場合にドロップボックスを消す
+  $(document).ready(function(){
+    var image_num = $('.item-image').length
+    if (image_num==10){
+      $('#image-box__container').css('display', 'none')
+    }
+  });
+  $(document).on("click", '.item-image__operetion--delete', function(){
+    //削除を押されたプレビュー要素を取得
+    var target_image = $(this).parent().parent();
+    //削除を押されたプレビューimageのfile名を取得
+    var target_index = $(target_image).data('index');
+    var target_file = $('[data-index="'+target_index+'"].js-file');
+    //プレビューを削除
+    // target_image.remove()
+    // target_file.remove()
+    //image-box__containerクラスをもつdivタグのクラスを削除のたびに変更
+    var num = $('.item-image').length
+    $('#image-box__container').show()
+    $('#image-box__container').attr('class', `item-num-${num}`)
+  })
+  $(document).on("click", '.item-image__operetion--edit__delete__hidden', function(){
     //削除を押されたプレビュー要素を取得
     var target_image = $(this).parent().parent();
     //削除を押されたプレビューimageのfile名を取得
     var target_id = $(target_image).attr('id');
-    var target_image_file = $('input[value="'+target_id+'"]');
+    var target_image_file = $('input[value="'+target_id+'"][type=hidden]');
     //プレビューを削除
     target_image.remove()
     target_image_file.remove()
@@ -81,6 +102,38 @@ $(function(){
     $('#image-box__container').show()
     $('#image-box__container').attr('class', `item-num-${num}`)
   })
+
+  $(document).on("click", '.item-image__operetion--edit__delete__file', function(){
+    //削除を押されたプレビュー要素を取得
+    var target_image = $(this).parent().parent();
+    var target_id = Number($(target_image).attr('id')) - 1;
+    //削除を押されたプレビューimageのfile名を取得
+    var target_image_file = $('#append-js-edit').children('div').children('input[value="'+target_id+'"][type=file]');
+    // var target_image_file = $('input[value="'+target_value+'"][type=file]');
+    //プレビューを削除
+    target_image.remove()
+    target_image_file.remove()
+    //image-box__containerクラスをもつdivタグのクラスを削除のたびに変更
+    var num = $('.item-image').length
+    $('#image-box__container').show()
+    $('#image-box__container').attr('class', `item-num-${num}`)
+  })
+
+  $(document).on("click", '.item-image__operetion--edit__delete__one', function(){
+    //削除を押されたプレビュー要素を取得
+    var target_image = $(this).parent().parent();
+    //削除を押されたプレビューimageのfile名を取得
+    var target_input = $('#append-js-edit').children('div:first').children();
+    //プレビューを削除
+    target_image.remove()
+    target_input.remove()
+    // target_input.remove()
+    //image-box__containerクラスをもつdivタグのクラスを削除のたびに変更
+    var num = $('.item-image').length
+    $('#image-box__container').show()
+    $('#image-box__container').attr('class', `item-num-${num}`)
+  })
+
   // var dropArea = $("#img-file");
   var dropArea = $(".item-num-0");
   dropArea.on("dragenter", function(e){
@@ -160,7 +213,7 @@ $(function(){
         $('.js-file').removeAttr('id');
         //image-box__containerの前にhtmlオブジェクトを追加
         $('.img-label').before(html);
-        $('#append-js').append(buildFileField(num));
+        $('#append-js-edit').append(buildFileField(num));
         };
         //image-box__containerにitem-num-(変数)という名前のクラスを追加する
         $('#image-box__container').attr('class', `item-num-${num}`)

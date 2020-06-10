@@ -36,8 +36,9 @@
           カテゴリー
         .lavel__Required
           [必須]
-    .category
-      =f.collection_select :category_id, @category_parent_array, :id, :name,{ include_blank: "選択してください"},class:"serect_field"
+    .append__category
+      .category
+        =f.collection_select :category_id, @category_parent_array, :id, :name,{ include_blank: "選択してください"},class:"serect_field"
     .bland
       .form__label
         .lavel__name

@@ -6,22 +6,22 @@ $(function(){
   function appendChildrenBox(insertHTML){
     var childSelectHtml = "";
     childSelectHtml = `<div class="category__child" id="children_wrapper">
-                        <select id="child__category" name="item[category_id]">
+                        <select id="child__category" name="item[category_id]" class="serect_field">
                           <option value="">---</option>
                           ${insertHTML}
                         </select>
                       </div>`;
-    $('.category').append(childSelectHtml);
+    $('.append__category').append(childSelectHtml);
   }
   function appendGrandchildrenBox(insertHTML){
     var grandchildSelectHtml = "";
     grandchildSelectHtml = `<div class="category__child" id="grandchildren_wrapper">
-                              <select id="grandchild__category" name="item[category_id]">
+                              <select id="grandchild__category" name="item[category_id]" class="serect_field">
                                 <option value="">---</option>
                                 ${insertHTML}
                                 </select>
                             </div>`;
-    $('.category').append(grandchildSelectHtml);
+    $('.append__category').append(grandchildSelectHtml);
   }
 
   $('#item_category_id').on('change',function(){
@@ -50,7 +50,7 @@ $(function(){
       $('#grandchildren_wrapper').remove();
     }
   });
-  $('.category').on('change','#child__category',function(){
+  $('.append__category').on('change','#child__category',function(){
     var childId = document.getElementById('child__category').value;
     if(childId != "" && childId != 46 && childId != 74 && childId != 134 && childId != 142 && childId != 147 && childId != 150 && childId != 158){
       $.ajax({
