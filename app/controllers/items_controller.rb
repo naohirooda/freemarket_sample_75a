@@ -63,7 +63,7 @@ before_action :show_all_instance,     only: [:show, :destroy]
 
   private
   def item_params
-    params.require(:item).permit(:name, :item_explanation, :category_id, :item_status, :auction_status, :delivery_fee, :shipping_origin, :exhibition_price,:brand_name, :days_until_shipping, images_attributes:  [:image, :_destroy, :id]).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :item_explanation, :category_id, :item_status, :auction_status, :delivery_fee, :shipping_origin, :exhibition_price,:brand_name, :days_until_shipping, images_attributes: [:image, :_destroy, :id]).merge(user_id: current_user.id)
   end
  
   def category_parent_array
