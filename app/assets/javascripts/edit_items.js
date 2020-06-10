@@ -21,17 +21,7 @@ $(function(){
       //読み込みが完了すると、srcにfileのURLを格納
       fileReader.onloadend = function() {
         var src = fileReader.result
-        var html1= `<div class='item-image' data-image="${file.name}" data-index="${aaa}" id="${noreset_id}">
-                    <div class=' item-image__content'>
-                      <div class='item-image__content--icon'>
-                        <img src=${src} width="188" height="180" >
-                      </div>
-                    </div>
-                    <div class='item-image__operetion'>
-                      <div class='item-image__operetion--edit__delete__one'>削除</div>
-                    </div>
-                  </div>`
-        var html2= `<div class='item-image' data-image="${file.name}" data-index="${aaa}" id="${noreset_id}">
+        var html= `<div class='item-image' data-image="${file.name}" data-index="${aaa}" id="${noreset_id-1}">
                     <div class=' item-image__content'>
                       <div class='item-image__content--icon'>
                         <img src=${src} width="188" height="180" >
@@ -43,22 +33,19 @@ $(function(){
                   </div>`
         const buildFileField1 = (num)=> {
           const html = `<div  class="js-file_group" data-index="${num}" id=1>
-                          <input class="js-file" type="file"
-                          name="item[images_attributes][${num}][image]"
+                          <input class="js-file-edit" type="file"
+                          name="item[images_attributes][${append_div_count+9}][image]"
                           id="img-file" data-index="${num}" value="${noreset_id}" >
                         </div>`;
           return html;
         }
-        $('.js-file').removeAttr('id');
+        $('.js-file-edit').removeAttr('id');
         //image_box__container要素の前にhtmlを差し込む
         append = $('#append-js-edit').children('div').last().attr('id')
         append_num = Number(append)
 
-        if(isNaN(append_num) == true){ 
-          $('.img-label').before(html1);
-        }else{
-          $('.img-label').before(html2);
-        }
+        $('.img-label').before(html);
+
         $('#append-js-edit').append(buildFileField1(num));
       };
       //image-box__containerのクラスを変更し、CSSでドロップボックスの大きさを変えてやる。
@@ -72,19 +59,24 @@ $(function(){
       $('#image-box__container').css('display', 'none')
     }
   });
-  $(document).on("click", '.item-image__operetion--delete', function(){
-    //削除を押されたプレビュー要素を取得
-    var target_image = $(this).parent().parent();
-    //削除を押されたプレビューimageのfile名を取得
-    var target_index = $(target_image).data('index');
-    var target_file = $('[data-index="'+target_index+'"].js-file');
-    //プレビューを削除
 
-    //image-box__containerクラスをもつdivタグのクラスを削除のたびに変更
-    var num = $('.item-image').length
-    $('#image-box__container').show()
-    $('#image-box__container').attr('class', `item-num-${num}`)
-  })
+  $(document).ready(function(){
+    $('.js-file-edit').removeAttr('id');
+    var num = $('.item-image').length - 1
+    var image_id = Number($('#image-box-1').attr('class'))
+    var append_div_count = Number($('div[id=1]').length) 
+    var noreset_id = image_id + append_div_count
+    const buildFileField = (num)=> {
+      const html = `<div  class="js-file_group" data-index="${num}" id=1>
+                      <input class="js-file-edit" type="file"
+                      name="item[images_attributes][100][image]"
+                      id="img-file" data-index="${num}" value="${noreset_id}" >
+                    </div>`;
+      return html;
+    }
+    $('#append-js-edit').append(buildFileField(num));
+  });
+
   $(document).on("click", '.item-image__operetion--edit__delete__hidden', function(){
     //削除を押されたプレビュー要素を取得
     var target_image = $(this).parent().parent();
@@ -103,27 +95,12 @@ $(function(){
   $(document).on("click", '.item-image__operetion--edit__delete__file', function(){
     //削除を押されたプレビュー要素を取得
     var target_image = $(this).parent().parent();
-    var target_id = Number($(target_image).attr('id')) - 1;
+    var target_id = Number($(target_image).attr('id'));
     //削除を押されたプレビューimageのfile名を取得
     var target_image_file = $('#append-js-edit').children('div').children('input[value="'+target_id+'"][type=file]');
     //プレビューを削除
     target_image.remove()
     target_image_file.remove()
-    //image-box__containerクラスをもつdivタグのクラスを削除のたびに変更
-    var num = $('.item-image').length
-    $('#image-box__container').show()
-    $('#image-box__container').attr('class', `item-num-${num}`)
-  })
-
-  $(document).on("click", '.item-image__operetion--edit__delete__one', function(){
-    //削除を押されたプレビュー要素を取得
-    var target_image = $(this).parent().parent();
-    //削除を押されたプレビューimageのfile名を取得
-    var target_input = $('#append-js-edit').children('div:first').children();
-    //プレビューを削除
-    target_image.remove()
-    target_input.remove()
-    // target_input.remove()
     //image-box__containerクラスをもつdivタグのクラスを削除のたびに変更
     var num = $('.item-image').length
     $('#image-box__container').show()
@@ -196,13 +173,13 @@ $(function(){
                     </div>`
           const buildFileField = (num)=> {
             const html = `<div  class="js-file_group" data-index="${num}">
-                            <input class="js-file" type="file"
+                            <input class="js-file-edit" type="file"
                             name="item[images_attributes][${num}][image]"
                             id="img-file" data-index="${num}">
                           </div>`;
             return html;
           }
-        $('.js-file').removeAttr('id');
+        $('.js-file-edit').removeAttr('id');
         //image-box__containerの前にhtmlオブジェクトを追加
         $('.img-label').before(html);
         $('#append-js-edit').append(buildFileField(num));

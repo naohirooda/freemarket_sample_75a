@@ -19,7 +19,7 @@
         #append-js-edit
           = f.fields_for :images do |image|
             .js-file_group{"data-index" => "#{image.index}"}
-              = image.file_field :image, type: 'file', value:"#{image.object.id}",style: "",  id:"img-file", class:'js-file',name: "item[images_attributes][#{@item.images.count}][image]", data:{index:""}
+              = image.file_field :image, type: 'file', value:"#{image.object.id}",style: "",  id:"img-file", class:'js-file-edit',name: "item[images_attributes][#{@item.images.count}][image]", data:{index:""}
         %i.fas.fa-camera
   .name__field
   .name__field
@@ -98,7 +98,7 @@
     %br
     .sales_commission
       .lavel__name
-        販売手数量（10%）
+        販売手数料（10%）
       #sales_commission_price
     .sales_profit
       .lavel__name
