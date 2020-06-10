@@ -45,6 +45,7 @@ Rails.application.routes.draw do
       get 'search'
       get 'post_done'
       get 'delete_done'
+      get 'update_done'
     end
   end
 
