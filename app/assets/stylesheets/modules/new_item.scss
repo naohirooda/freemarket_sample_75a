@@ -25,14 +25,14 @@
     margin-bottom: 7px;
     margin-top: 10px;
     .lavel__name{
-    margin-right: 5px;
+      margin-right: 5px;
     }
     .lavel__Required{
-    background-color: red;
-    color: white;
-    width: 50px;
-    text-align: center;
-  }
+      background-color: red;
+      color: white;
+      width: 50px;
+      text-align: center;
+    }
   }
   #image-box-1{
     display: flex;
@@ -107,8 +107,8 @@
   }
   .explanation_field{
     padding: 0 16px;
-  width: 940px;
-  height: 120px;
+    width: 940px;
+    height: 120px;
   }
   .serect_field{
     @include input_place();

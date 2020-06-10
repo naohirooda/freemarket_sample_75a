@@ -1,4 +1,6 @@
 = render "top/header"
+- breadcrumb :user_show
+= render "items/nav"
 - if user_signed_in?
   .user
     = render 'user_side'
@@ -15,9 +17,9 @@
           .prof__data
             現在の出品数：#{@sale_items.count}
           .prof__data
-            コメントされた数：5
+            コメントされた数：#{@be_commented.count}
           .prof__data
-            コメントした数：10
+            コメントした数：#{@to_comments.count}
       .user__body__subtitle
         最近出品した商品
       .user__body__lists
@@ -37,7 +39,7 @@
                         円
                       %li
                         = icon('fa', 'star')
-                        0
+                        = item.favorites.count
                     %p (税込)
                 .list__sold
                   .list__sold__inner
@@ -57,7 +59,7 @@
                         円
                       %li
                         = icon('fa', 'star')
-                        0
+                        = item.favorites.count
                     %p (税込)
 - else
   .done#fullsize

@@ -37,11 +37,14 @@ before_action :category_map, only: [:edit, :update]
   end
 
   def show
+    @favorites = Favorite.where(item_id: params[:id])
+    @user_favorite = @favorites.where(user_id: current_user)
+    @comment = Comment.new
+    @comments = @item.comments.includes(:user)
   end
 
   def edit
   end
-
 
   def update
     if item_params[:images_attributes].nil?
@@ -77,6 +80,11 @@ before_action :category_map, only: [:edit, :update]
       flash.now[:alert] = '削除できませんでした'
       render :show
     end
+  end
+
+  def search
+    @search_items = Item.search(params[:keyword])
+    @keyword = params[:keyword]
   end
 
   private

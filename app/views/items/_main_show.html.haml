@@ -31,7 +31,7 @@
                 %td= @user.nickname
               %tr 
                 %th カテゴリー
-                - if @category_id == 46 or @category_id == 74 or @category_id == 134 or @category_id == 142 or @category_id == 147 or @category_id == 150 or @category_id == 158
+                - if [46, 74, 134, 142, 147, 150, 158].include?(@category_id)
                   %td
                     = link_to "#{@category_child.name}","#"
                     %br= link_to "#{@category_grandchild.name}","#" 
@@ -59,10 +59,8 @@
                 %th 発送日の目安
                 %td= @item.days_until_shipping
           .mainShow__box__content__top__itemBox__option
-            %ul.like
-              %li.like__list
-                = icon('fa', 'star')
-                お気に入り 0
+            %ul#like
+              = render partial:'favorites/favorite', locals: { item: @item, favorites: @favorites, user_favorite: @user_favorite }
             %ul.report
               %li.report__list
                 = link_to "#" do
@@ -76,15 +74,64 @@
             = link_to "購入画面に進む", buy_card_path(@item.id), data: {"turbolinks" => false} , class: "pay"
           - else
         .mainShow__box__content__top__commentBox
-          .mainShow__box__content__top__commentBox__contents
-          = form_with url: root_path, class: "new_comment" do |f|
-            = f.text_area "", required: "required", class: "text_area"
+          .title
+            コメント一覧
+          .mainShow__box__content__top__commentBox__comments#comments
+            - if @comments
+              - @comments.each do |comment|
+                -if comment.user_id == @item.user_id
+                  .mainShow__box__content__top__commentBox__comments__comment
+                    .profile
+                      .profile__name
+                        = comment.user.nickname
+                      .profile__right
+                        .image
+                          = icon('fas', 'user-circle')
+                        .seller_or_buyer
+                          出品者
+                    .comment
+                      .comment__text
+                        = comment.comment
+                      .comment__bottom
+                        .comment__date
+                          = icon('far', 'clock')
+                          = comment.days_passed
+                        .comment__trash
+                          = link_to item_comment_path(comment.item.id, comment.id), "item_id": :@item, method: :delete do
+                            = icon('fa', 'trash')
+                - else
+                  .mainShow__box__content__top__commentBox__comments__comment--other
+                    .profile
+                      .profile__right
+                        .image
+                          = icon('far', 'user-circle')
+                        .seller_or_buyer
+                          お客様
+                      .profile__name
+                        = comment.user.nickname
+                    .comment
+                      .comment__text
+                        = comment.comment
+                      .comment__bottom
+                        .date
+                          = icon('far', 'clock')
+                          = comment.days_passed
+                        .comment__icon
+                          .flag
+                            = icon('far', 'flag')
+                          .trash
+                            = link_to item_comment_path(comment.item.id, comment.id), "item_id": :@item, method: :delete do
+                              = icon('fa', 'trash')
+          -if user_signed_in?
+            = form_with model: [@item, @comment], local: true, class: "new_comment", id: "comment_form" do |f|
+              = f.text_area :comment, required: "required", class: "text_area"
+              %p.note
+                相手のことを考え丁寧なコメントを心がけましょう。
+                %br 不快な言葉遣いなどは利用制限や退会処分となることがあります。
+              = f.submit "コメントする", class: "comment_btn"
+          - else
             %p.note
-              相手のことを考え丁寧なコメントを心がけましょう。
-              %br 不快な言葉遣いなどは利用制限や退会処分となることがあります。
-            %button.comment_btn{type:"submit"}
-              = icon('fa', 'comment')
-              コメントする
+              商品の購入、コメントの投稿には新規会員登録/ログインが必要です
         %ul.links
           %li.links__before
             = link_to "#", class: "angle__left" do
@@ -95,7 +142,7 @@
               %span 後ろの商品
               = icon('fa', 'angle-right')
       .mainShow__box__content__related
-        - if @category_id == 46 or @category_id == 74 or @category_id == 134 or @category_id == 142 or @category_id == 147 or @category_id == 150 or @category_id == 158
+        - if [46, 74, 134, 142, 147, 150, 158].include?(@category_id)
           = link_to "#{@category_child.name}をもっと見る", "#", class: "related"
         - else
           = link_to "#{@category_parent.name}をもっと見る", "#", class: "related"

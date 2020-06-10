@@ -1,0 +1,12 @@
+- if user_favorite.exists?
+  %li.like__list--on
+    = link_to item_favorite_path(item.id, user_favorite.ids), method: :delete , remote: true do
+      = icon('fa', 'star')
+      お気に入り
+      = favorites.count
+- else
+  %li.like__list
+    = link_to item_favorites_path(item.id), method: :post, remote: true do
+      = icon('fa', 'star')
+      お気に入り
+      = favorites.count

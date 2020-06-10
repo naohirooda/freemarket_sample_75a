@@ -1,4 +1,6 @@
 = render "top/header"
+- breadcrumb :user_sold_items
+= render "items/nav"
 .item__body
   .item__body__title
     売却済の商品一覧
@@ -18,7 +20,7 @@
                   円
                 %li
                   = icon('fa', 'star')
-                  0
+                  = item.favorites.count
               %p (税込)
           .list__sold
             .list__sold__inner

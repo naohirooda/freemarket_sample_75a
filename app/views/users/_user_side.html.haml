@@ -4,15 +4,15 @@
   .user__side__menu
     = link_to "マイページ", user_path(current_user.id), class: "link"
   .user__side__menu
+    = link_to "お気に入り商品一覧", favorites_users_path, class: "link"
+  .user__side__menu
     = link_to "出品する", new_item_path, data: {"turbolinks" => false} , class: "link"
   .user__side__menu
     = link_to "出品中の商品一覧", users_path, class: "link"
   .user__side__menu
     = link_to "売却済の商品一覧", sold_items_users_path, class: "link"
   .user__side__menu
-    = link_to "コメントした商品一覧　　未実装", "#", class: "link"
-  .user__side__menu
-    = link_to "コメントされた商品一覧　未実装", "#", class: "link"
+    = link_to "コメントがついた商品一覧", commented_items_users_path, class: "link"
   .user__side__subtitle 各種設定
   .user__side__menu
     = link_to "会員情報の編集", edit_user_registration_path, class: "link"

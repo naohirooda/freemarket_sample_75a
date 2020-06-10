@@ -1,7 +1,7 @@
 class CardController < ApplicationController
   before_action :move_to_root
-  before_action :set_card, only: [:new, :show, :destroy, :buy, :pay]
-  before_action :set_item, only: [:buy, :pay]
+  before_action :set_card,    only: [:new, :show, :destroy, :buy, :pay]
+  before_action :set_item,    only: [:buy, :pay]
   require "payjp"
 
   def new

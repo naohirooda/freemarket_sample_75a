@@ -147,6 +147,8 @@ GEM
     formatador (0.2.5)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    gretel (3.0.9)
+      rails (>= 3.1.0)
     haml (5.1.2)
       temple (>= 0.8.0)
       tilt
@@ -358,7 +360,7 @@ GEM
       railties (>= 5.0)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.4)
+    websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.25)
@@ -385,6 +387,7 @@ DEPENDENCIES
   factory_bot_rails
   fog-aws
   font-awesome-sass
+  gretel
   haml-rails
   jbuilder (~> 2.5)
   jquery-rails

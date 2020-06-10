@@ -40,11 +40,12 @@ $(function(){
         $('.img-label').before(html);
         // $('#image-box__container').before(buildFileField(num))
         $('#append-js').append(buildFileField(num));
-      };
+      }; 
       //image-box__containerのクラスを変更し、CSSでドロップボックスの大きさを変えてやる。
       $('#image-box__container').attr('class', `item-num-${num}`)
     });
   });
+  
   $(document).on("click", '.item-image__operetion--delete', function(){
     //削除を押されたプレビュー要素を取得
     var target_image = $(this).parent().parent();
