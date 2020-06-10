@@ -10,7 +10,6 @@ FactoryBot.define do
     shipping_origin       {1}
     days_until_shipping   {1}
     exhibition_price      {1000}
-
     after(:build) do |item|
       item.images << build(:image, item: item)
     end

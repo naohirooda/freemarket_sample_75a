@@ -1,42 +1,37 @@
 .new__page__header{
-    height: 75px;
-    width: 100%;
-    background-color: #ffffff;
-    margin: 0 auto;
-    text-align: center;
-    padding-top: 8px;
-    box-sizing: border-box;
-    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.16);
-    
-    img {
-      width: 150px;
-      cursor: pointer;
-    }
+  height: 75px;
+  width: 100%;
+  background-color: #FFFFFF;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 8px;
+  box-sizing: border-box;
+  box-shadow: 0 3px 3px 0 rgba(0,0,0,0.16);
+  img {
+    width: 150px;
+    cursor: pointer;
+  }
 }
-.new_item{
-  background-color: #ffffff;
+.new_item, .edit_item{
+  background-color: #FFFFFF;
   width: 100%;
   max-width: 1000px;
   height: auto;
   margin: 0 auto;
   margin-top: 50px;
-  .alert{
-    color: red;
-  }
   .form__label{
     display: flex;
     align-items: center;
     margin-bottom: 7px;
     margin-top: 10px;
     .lavel__name{
-    margin-right: 5px;
+      margin-right: 5px;
     }
     .lavel__Required{
-    background-color: red;
-    color: white;
-    width: 50px;
-    text-align: center;
-  
+      background-color: red;
+      color: white;
+      width: 50px;
+      text-align: center;
     }
   }
   #image-box-1{
@@ -87,15 +82,15 @@
       @include image_place();
     }
     .img-label{
-    flex-wrap: wrap;
-    .item-image{
-      &__content{
-        &--icon{
-          object-fit: contain;
+      flex-wrap: wrap;
+      .item-image{
+        &__content{
+          &--icon{
+            object-fit: contain;
+          }
         }
       }
     }
-  }
     .fas.fa-camera{
       margin-top: 75px;
     }
@@ -103,7 +98,7 @@
       width: 50px;
       margin-right: 0px;
     }
-    .js-file{
+    .js-file,.js-file-edit{
       display: none;
     }
   }
@@ -112,36 +107,25 @@
   }
   .explanation_field{
     padding: 0 16px;
-  width: 940px;
-  height: 120px;
+    width: 940px;
+    height: 120px;
   }
-  
   .serect_field{
     @include input_place();
   }
-  
   .exhibition_price_field{
     height: 40px;
     padding: 0 16px;
     width: 40%;
     text-align: right;
-
-  }
-  .category{
-    .child__category{
-      padding: 0 16px;
-      width: 100%;
-      height: 60px;
-    }
   }
   .send{
     margin-top: 50px;
     text-align: center;
     margin-bottom: 50px;
-    
     &__sipping_btn{
       background-color: #3CCACE;
-      color: #ffffff;
+      color: #FFFFFF;
       width: 360px;
       height: 48px;
       font-weight: 600;
