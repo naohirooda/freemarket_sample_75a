@@ -119,14 +119,12 @@ before_action :category_map, only: [:edit, :update]
     grandchild = @item.category
     child = grandchild.parent
     if @category_id == 46 or @category_id == 74 or @category_id == 134 or @category_id == 142 or @category_id == 147 or @category_id == 150 or @category_id == 158
-      @category_children_array = Category.where(ancestry: child.ancestry).each do |child|
-      end
+      @category_children_array = Category.where(ancestry: child.ancestry)
       @child_array = []
       @child_array << child.name
       @child_array << child.id
 
-      @category_grandchildren_array = Category.where(ancestry: grandchild.ancestry) .each do |child|
-      end
+      @category_grandchildren_array = Category.where(ancestry: grandchild.ancestry)
       @grandchild_array = []
       @grandchild_array << grandchild.name
       @grandchild_array << grandchild.id
@@ -135,14 +133,12 @@ before_action :category_map, only: [:edit, :update]
       @parent_array << @item.category.parent.parent.name
       @parent_array << @item.category.parent.parent.id
 
-      @category_children_array = Category.where(ancestry: child.ancestry).each do |child|
-      end
+      @category_children_array = Category.where(ancestry: child.ancestry)
       @child_array = []
       @child_array << child.name
       @child_array << child.id
 
-      @category_grandchildren_array = Category.where(ancestry: grandchild.ancestry) .each do |child|
-      end
+      @category_grandchildren_array = Category.where(ancestry: grandchild.ancestry)
       @grandchild_array = []
       @grandchild_array << grandchild.name
       @grandchild_array << grandchild.id
