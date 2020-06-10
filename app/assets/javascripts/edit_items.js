@@ -59,12 +59,10 @@ $(function(){
         }else{
           $('.img-label').before(html2);
         }
-        // $('#image-box__container').before(buildFileField(num))
         $('#append-js-edit').append(buildFileField1(num));
       };
       //image-box__containerのクラスを変更し、CSSでドロップボックスの大きさを変えてやる。
       $('#image-box__container').attr('class', `item-num-${num}`)
-      // $('#img-file').attr('name', `item[images_attributes][${num}][image]`)
     });
   });
   // 10枚登録されていた場合にドロップボックスを消す
@@ -81,8 +79,7 @@ $(function(){
     var target_index = $(target_image).data('index');
     var target_file = $('[data-index="'+target_index+'"].js-file');
     //プレビューを削除
-    // target_image.remove()
-    // target_file.remove()
+
     //image-box__containerクラスをもつdivタグのクラスを削除のたびに変更
     var num = $('.item-image').length
     $('#image-box__container').show()
@@ -109,7 +106,6 @@ $(function(){
     var target_id = Number($(target_image).attr('id')) - 1;
     //削除を押されたプレビューimageのfile名を取得
     var target_image_file = $('#append-js-edit').children('div').children('input[value="'+target_id+'"][type=file]');
-    // var target_image_file = $('input[value="'+target_value+'"][type=file]');
     //プレビューを削除
     target_image.remove()
     target_image_file.remove()
@@ -134,19 +130,16 @@ $(function(){
     $('#image-box__container').attr('class', `item-num-${num}`)
   })
 
-  // var dropArea = $("#img-file");
   var dropArea = $(".item-num-0");
   dropArea.on("dragenter", function(e){
     e.stopPropagation();
     e.preventDefault();
-    // $(this).css('border', '4px solid #000');
   });
   //ドラッグした要素がドロップターゲットの上にある時にイベントが発火
   dropArea.on("dragover", function(e){
     e.stopPropagation();
     e.preventDefault();
     //ドロップエリアに影がつく
-    // $(this).children('#image-box__container').css({'border': '1px solid rgb(204, 204, 204)','box-shadow': '0px 0px 4px'});
     $(this).css({'border': '1px solid rgb(204, 204, 204)','box-shadow': '0px 0px 4px'});
   });
   dropArea.on("dragleave", function(e){
@@ -171,7 +164,6 @@ $(function(){
       e.preventDefault();
       $(this).css({'border': '1px dashed rgb(204, 204, 204)','box-shadow': '0px 0px 0px'}),false;
       var files = e.dataTransfer.files;
-      // var files = e.originalEvent.dataTransfer.files;
       $("#img-file")[0].files = files;
       //ドラッグアンドドロップで取得したデータについて、プレビューを表示
       $.each(files, function(i,file){
