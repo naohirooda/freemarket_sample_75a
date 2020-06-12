@@ -1,2 +1,73 @@
 .item_search
-  こちらのサイドバーは「ransack」を用いた絞り込み機能を実装するために用意しています。
+ = search_form_for(@q,url: detail_search_items_path) do |f|
+  .detail_search_sort
+  = f.select( :sorts, { '並び替え': 'id desc', '価格の安い順': 'price asc', '価格の高い順': 'price desc', '出品の古い順': 'updated_at asc', '出品の新しい順': 'updated_at desc' } , { onchange: 'this.form.submit()'} )
+  .detail_search_form
+  .detail_search__title
+  %h3 詳細検索
+  .detail_search__group
+  .detail_search__group--label
+  %p キーワードを追加する
+  = f.search_field :name_cont, :value => @keyword
+  .detail_search__group
+  %p 価格
+  .detail_search__group--forms
+  = f.search_field :exhibition_price_gteq, placeholder: "¥ Min"
+  %p 〜
+  = f.search_field :exhibition_price_lteq, placeholder: "¥ Max"
+  .detail_search__group
+  .detail_search__group--label
+  %p 商品の状態
+  .detail_search__group--checkbox
+  %label
+  =f.radio_button :item_status_eq,1
+  = '新品、未使用'
+  %br
+  .detail_search__group--checkbox
+  %label
+  =f.radio_button :item_status_eq,2
+  = '未使用に近い'
+  %br
+  .detail_search__group--checkbox
+  %label
+  =f.radio_button :item_status_eq,3
+  = '目立った傷や汚れなし'
+  %br
+  .detail_search__group--checkbox
+  %label
+  =f.radio_button :item_status_eq,4
+  = 'やや傷や汚れあり'
+  %br
+  .detail_search__group--checkbox
+  %label
+  =f.radio_button :item_status_eq,5
+  = '傷や汚れあり'
+  %br
+  .detail_search__group--checkbox
+  %label
+  =f.radio_button :item_status_eq,6
+  = '全体的に状態が悪い'
+
+  .detail_search__group--label
+  %p 配送料の負担
+  .detail_search__group--checkbox
+  %label
+  =f.radio_button :delivery_fee_eq,1
+  = '出品者負担'
+  %br
+  .detail_search__group--checkbox
+  %label
+  =f.radio_button :delivery_fee_eq,2
+  = '購入者負担'
+  .detail_search__group--label
+  %p 販売状況
+  .detail_search__group--checkbox
+  %label
+  =f.radio_button :auction_status_eq,1
+  = '出品中'
+  %br
+  .detail_search__group--checkbox
+  %label
+  =f.radio_button :auction_status_eq,2
+  = '売り切れ'  
+  = f.submit "検索",class:"detail_search__btns"

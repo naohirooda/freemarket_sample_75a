@@ -4,6 +4,7 @@ before_action :set_item, only: [:show, :edit, :update, :destroy]
 before_action :show_all_instance, only: [:show, :edit, :update, :destroy]
 before_action :check_item_details, only: [:post_done, :update_done]
 before_action :category_map, only: [:edit, :update]
+before_action :set_ransack,only: [:search, :detail_search]
 
   def index
     @items = Item.includes(:images).order('created_at DESC')
@@ -85,6 +86,13 @@ before_action :category_map, only: [:edit, :update]
   def search
     @search_items = Item.search(params[:keyword])
     @keyword = params[:keyword]
+    @q = Item.ransack(params[:q])
+    @items = @q.result(distinct: true)
+  end
+  def detail_search   
+    @search_item = Item.ransack(params[:q]) 
+    @items = @search_item.result
+    @keyword = params[:name_cont]
   end
 
   private
@@ -113,6 +121,10 @@ before_action :category_map, only: [:edit, :update]
     @category_parent = Category.find(@category_id).parent.parent
     @category_child = Category.find(@category_id).parent
     @category_grandchild = Category.find(@category_id)
+  end
+
+  def set_ransack
+    @q = Item.ransack(params[:q])
   end
 
   def category_map
