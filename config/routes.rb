@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       get 'search'
       get 'post_done'
       get 'delete_done'
+      get 'detail_search'
     end
   end
 

@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
-before_action :category_parent_array, only: [:new, :create]
+before_action :category_parent_array, only: [:new, :create, :search]
 before_action :set_item, only: [:show, :destroy]
 before_action :show_all_instance, only: [:show, :destroy]
+before_action :set_ransack
 
   def index
     @items = Item.includes(:images).order('created_at DESC')
@@ -57,6 +58,13 @@ before_action :show_all_instance, only: [:show, :destroy]
   def search
     @search_items = Item.search(params[:keyword])
     @keyword = params[:keyword]
+    @q = Item.ransack(params[:q])
+    @items = @q.result(distinct: true)
+  end
+  def detail_search   
+    @search_item = Item.ransack(params[:q]) 
+    @items = @search_item.result
+    @keyword = params[:name_cont]
   end
 
   private
@@ -81,5 +89,8 @@ before_action :show_all_instance, only: [:show, :destroy]
     @category_parent = Category.find(@category_id).parent.parent
     @category_child = Category.find(@category_id).parent
     @category_grandchild = Category.find(@category_id)
+  end
+  def set_ransack
+    @q = Item.ransack(params[:q])
   end
 end
