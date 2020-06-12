@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       get 'commented_items'
       get 'sold_items'
       get 'edit_done'
+      get 'favorites'
     end
   end
 
@@ -36,7 +37,8 @@ Rails.application.routes.draw do
   end
 
   resources :items do
-    resources :comments, only: [:create, :destroy]
+    resources :comments,  only: [:create, :destroy]
+    resources :favorites, only: [:create, :destroy]
     collection do
       get 'get_category_children', defaults: { fomat: 'json'}
       get 'get_category_grandchildren', defaults: { fomat: 'json'}
@@ -44,6 +46,7 @@ Rails.application.routes.draw do
       get 'post_done'
       get 'delete_done'
       get 'detail_search'
+      get 'update_done'
     end
   end
 

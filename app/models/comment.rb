@@ -8,7 +8,7 @@ class Comment < ApplicationRecord
     month = created_at.month
     day = created_at.mday
     created_date = Date.new(year, month, day)
-    if Date.today - created_date = 0
+    if Date.today - created_date == 0
       "本日"
     else
       date = Date.today - created_date

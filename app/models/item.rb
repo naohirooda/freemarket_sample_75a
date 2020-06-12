@@ -3,6 +3,8 @@ class Item < ApplicationRecord
   has_many :images,    dependent: :destroy
   belongs_to :category
   has_many :comments,  dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :users,     through: :favorites
 
   accepts_nested_attributes_for :images, allow_destroy: true
   validates :name,                         presence: true,    length: { maximum: 40 } 
@@ -15,7 +17,7 @@ class Item < ApplicationRecord
   validates :days_until_shipping,          presence: true
   validates :exhibition_price,             presence: true
   validates_associated :images
-  validates :images,                      presence: true
+  validates :images,                       presence: true
   enum item_status: {新品未、使用: 1, 未使用に近い: 2,目立った傷や汚れなし: 3,やや傷や汚れあり: 4,傷や汚れあり: 5,全体的に状態が悪い: 6}
   enum auction_status: {出品中: 1, 売り切れ: 2}
   enum delivery_fee: {送料込み（出品者負担）: 1, 着払い（購入者負担）: 2}

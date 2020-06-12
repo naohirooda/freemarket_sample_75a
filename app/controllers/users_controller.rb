@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :move_to_root,     except: [:show, :destroy]
   before_action :set_user_items,   except: [:edit_done, :destroy]
-  before_action :set_sale_items,   only: [:index, :show]
+  before_action :set_sale_items,   only:   [:index, :show]
 
   def index
   end
@@ -14,9 +14,13 @@ class UsersController < ApplicationController
     @commented_items = Item.where(user_id: current_user.id).joins(:comments).uniq
   end
 
+  def favorites
+    @favorites = Favorite.where(user_id: current_user)
+  end
+
   def show
     @user = User.find(params[:id])
-    @item_3 = @items.order('created_at DESC').first(3)
+    @item_3 = @items.order('updated_at DESC').first(3)
     @to_comments = Comment.where(user_id: current_user.id)
     @be_commented = Comment.where.not(user_id: current_user.id).where(item_id: @items.ids)
   end

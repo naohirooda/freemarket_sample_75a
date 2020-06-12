@@ -1,13 +1,11 @@
 - if user_signed_in?
   .new__page__header
     = link_to image_tag("logo/logo.png", alt: "logo"), root_path
-
   = form_for @item do |f|
     = render 'layouts/error_messages', model: f.object
-
     .name__field
-      .form__label     
-        .lavel__name      
+      .form__label
+        .lavel__name
           出品画像
         .lavel__Required
           [必須]
@@ -19,10 +17,9 @@
               .js-file_group{"data-index" => "#{image.index}"}
                 = image.file_field :image, type: 'file', value:"",style: "",  id:"img-file", class:'js-file',name: "item[images_attributes][#{@item.images.count}][image]",data:{index:"0"}
           %i.fas.fa-camera
-
     .name__field
-      .form__label     
-        .lavel__name      
+      .form__label
+        .lavel__name
           商品名
         .lavel__Required
           [必須]
@@ -34,13 +31,14 @@
         .lavel__Required
           [必須]
       =f.text_field :item_explanation, class: 'explanation_field', placeholder: '商品の説明（必須 1,000文字以内）&#13;&#10;（色、素材、重さ、定価、注意点など）&#13;&#10;例）2010年頃に1万円で購入したジャケットです。'.html_safe 
-    .category
-      .form__label
-        .lavel__name 
-          カテゴリー
-        .lavel__Required
-          [必須]
-      =f.collection_select :category_id, @category_parent_array, :id, :name,{ include_blank: "選択してください"},class:"serect_field"
+    .append__category
+      .category
+        .form__label
+          .lavel__name 
+            カテゴリー
+          .lavel__Required
+            [必須]
+        =f.collection_select :category_id, @category_parent_array, :id, :name,{ include_blank: "選択してください"},class:"serect_field"
     .bland
       .form__label
         .lavel__name
@@ -87,9 +85,8 @@
       %br
       .sales_commission
         .lavel__name
-          販売手数量（10%）
+          販売手数料（10%）
         #sales_commission_price
-    
       .sales_profit
         .lavel__name
           販売利益

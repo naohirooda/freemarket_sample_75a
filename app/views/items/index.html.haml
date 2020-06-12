@@ -19,7 +19,7 @@
                     円
                   %li
                     = icon('fa', 'star')
-                    0
+                    = item.favorites.count
                 %p (税込)
             .list__sold
               .list__sold__inner
@@ -39,7 +39,7 @@
                     円
                   %li
                     = icon('fa', 'star')
-                    0
+                    = item.favorites.count
                 %p (税込)
 = render "top/lower-photo"
 = render "top/footer"
